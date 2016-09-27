@@ -8,6 +8,21 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <TextBlock HorizontalAlignment="Center"
+                   FontFamily="Century Gothic"
+                   Margin="50"
+                   FontSize="25">College Organiser
+        </TextBlock>
+        <StackPanel x:Name="sptextBlock" VerticalAlignment="Bottom"
+                    Margin="30,0,10,118"
+                    HorizontalAlignment="Center" >
+            <TextBlock x:Name="titleTextBlock" 
+                       x:Uid="uidTitleTextBlock"
+                       HorizontalAlignment="Center"
+                       FontFamily="Century Gothic"
+                       TextAlignment="Center"
+                       Width="Auto">Tap To Begin
+            </TextBlock>
+        </StackPanel>
     </Grid>
 </Page>
