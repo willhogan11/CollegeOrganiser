@@ -51,5 +51,15 @@ namespace CollegeOrganiser
                 rootFrame.GoBack();
             }
         }
+
+        private void EventsButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(EventsPage));
+        }
+
+        private void MeetingButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(Meetings));
+        }
     }
 }

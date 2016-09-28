@@ -18,7 +18,8 @@
                     Width="250"
                     Background="LightBlue"
                     FontSize="25"
-                    Content="Events/Deadlines" />
+                    Content="Events/Deadlines"
+                    Tapped="EventsButton_Tapped"/>
 
             <Button HorizontalAlignment="Center" 
                     FontFamily="Century-Gothic" 
@@ -26,23 +27,8 @@
                     Width="250"
                     FontSize="25" 
                     Background="LightBlue"
-                    Content="Meetings" />
+                    Content="Meetings" 
+                    Tapped="MeetingButton_Tapped"/>
         </StackPanel>
-        
-        <!--<StackPanel HorizontalAlignment="Center">
-            <TextBlock HorizontalAlignment="Center"
-                           FontSize="25"
-                           FontFamily="Century Gothic"
-                           Margin="0 500 0 0">This is the Menu Page
-            </TextBlock>
-        </StackPanel>-->
     </Grid>
-    <!--<Page.TopAppBar>
-        <AppBar IsOpen="True" IsSticky="True">
-            <StackPanel Margin="50 300 0 0" Orientation="Horizontal" HorizontalAlignment="Center" Width="Auto">
-                <AppBarButton x:Name="Tasks" x:Uid="uidTasks" Icon="Target" />
-                <AppBarButton x:Name="Meetings" x:Uid="uidMeetings" Icon="Add" />
-            </StackPanel>
-        </AppBar>
-    </Page.TopAppBar>-->
 </Page>
