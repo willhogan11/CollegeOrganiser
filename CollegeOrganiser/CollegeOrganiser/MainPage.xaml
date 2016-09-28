@@ -8,20 +8,23 @@
     mc:Ignorable="d"
     Tapped="Page_Tapped">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource bookBrush}">
         <TextBlock HorizontalAlignment="Center"
-                   FontFamily="Century Gothic"
-                   Margin="0 50 0 0"
-                   FontSize="25">College Organiser
+                   FontFamily="Century-Gothic"
+                   Margin="0 30 60 0"
+                   FontSize="32" FontWeight="Bold">College Organiser
         </TextBlock>
         <StackPanel x:Name="sptextBlock" VerticalAlignment="Bottom"
                     Margin="0 0 0 50"
                     HorizontalAlignment="Center" >
             <TextBlock x:Name="titleTextBlock" 
+                       Margin="170 0 0 0"
                        x:Uid="uidTitleTextBlock"
                        HorizontalAlignment="Center"
-                       FontFamily="Century Gothic"
+                       FontFamily="Century-Gothic"
                        TextAlignment="Center"
+                       FontSize="20"
+                       FontWeight="Bold"
                        Width="Auto">Tap To Begin
             </TextBlock>
         </StackPanel>

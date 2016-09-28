@@ -7,20 +7,26 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource bookBrush}">
 
-        <StackPanel HorizontalAlignment="Center" Margin="0 200 0 200" Width="300">
+        <StackPanel HorizontalAlignment="Center" 
+                    Margin="0 200 0 200" 
+                    Width="300">
             <Button HorizontalAlignment="Center" 
                     FontFamily="Century-Gothic" 
                     Margin="0 20 0 0"
                     Width="250"
-                    FontSize="30" Content="Events/Deadlines" />
+                    Background="LightBlue"
+                    FontSize="25"
+                    Content="Events/Deadlines" />
 
             <Button HorizontalAlignment="Center" 
                     FontFamily="Century-Gothic" 
                     Margin="0 40 0 0"
                     Width="250"
-                    FontSize="30" Content="Meetings" />
+                    FontSize="25" 
+                    Background="LightBlue"
+                    Content="Meetings" />
         </StackPanel>
         
         <!--<StackPanel HorizontalAlignment="Center">
