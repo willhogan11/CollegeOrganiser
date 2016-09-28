@@ -8,20 +8,35 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel HorizontalAlignment="Center">
+
+        <StackPanel HorizontalAlignment="Center" Margin="0 200 0 200" Width="300">
+            <Button HorizontalAlignment="Center" 
+                    FontFamily="Century-Gothic" 
+                    Margin="0 20 0 0"
+                    Width="250"
+                    FontSize="30" Content="Events/Deadlines" />
+
+            <Button HorizontalAlignment="Center" 
+                    FontFamily="Century-Gothic" 
+                    Margin="0 40 0 0"
+                    Width="250"
+                    FontSize="30" Content="Meetings" />
+        </StackPanel>
+        
+        <!--<StackPanel HorizontalAlignment="Center">
             <TextBlock HorizontalAlignment="Center"
                            FontSize="25"
                            FontFamily="Century Gothic"
                            Margin="0 500 0 0">This is the Menu Page
             </TextBlock>
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
-    <Page.TopAppBar>
+    <!--<Page.TopAppBar>
         <AppBar IsOpen="True" IsSticky="True">
             <StackPanel Margin="50 300 0 0" Orientation="Horizontal" HorizontalAlignment="Center" Width="Auto">
-                <AppBarButton x:Name="Tasks" x:Uid="uidTasks" Icon="Target" Content="Texts" />
+                <AppBarButton x:Name="Tasks" x:Uid="uidTasks" Icon="Target" />
                 <AppBarButton x:Name="Meetings" x:Uid="uidMeetings" Icon="Add" />
             </StackPanel>
         </AppBar>
-    </Page.TopAppBar>
+    </Page.TopAppBar>-->
 </Page>
