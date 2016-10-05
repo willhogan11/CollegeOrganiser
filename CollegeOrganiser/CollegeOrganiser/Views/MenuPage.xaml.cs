@@ -2,6 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using CollegeOrganiser.Data;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -12,6 +13,8 @@ namespace CollegeOrganiser
     /// </summary>
     public sealed partial class MenuPage : Page
     {
+        LoadDatabase loadDataBase;  
+     
         public MenuPage()
         {
             this.InitializeComponent();
@@ -54,6 +57,8 @@ namespace CollegeOrganiser
 
         private void EventsButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
+            loadDataBase = new LoadDatabase();
+            loadDataBase.dbConnection();
             Frame.Navigate(typeof(EventsPage));
         }
 

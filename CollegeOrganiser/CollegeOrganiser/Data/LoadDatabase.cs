@@ -1,4 +1,6 @@
 ﻿using System.IO;
+using System.Diagnostics;
+
 
 namespace CollegeOrganiser.Data
 {
@@ -8,13 +10,17 @@ namespace CollegeOrganiser.Data
         private string path;
         // private SQLite.Net.SQLiteConnection conn;
 
-        public LoadDatabase()
+        //public LoadDatabase()
+        //{
+        //    path = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "db.collegeOrganiser");
+        //}
+
+        public void dbConnection()
         {
             path = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "db.collegeOrganiser");
-        }
-
-        private void dbConnection()
-        {
+            #if DEBUG
+                Debug.WriteLine(path);
+            #endif
             // conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), path);
         }
     }
