@@ -18,6 +18,7 @@
                     Width="250"
                     Background="LightBlue"
                     FontSize="25"
+                    BorderBrush="Black"
                     Content="Events/Deadlines"
                     Tapped="EventsButton_Tapped"/>
 
@@ -26,6 +27,7 @@
                     Margin="0 40 0 0"
                     Width="250"
                     FontSize="25" 
+                    BorderBrush="Black"
                     Background="LightBlue"
                     Content="Meetings" 
                     Tapped="MeetingButton_Tapped"/>

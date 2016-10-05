@@ -1,4 +1,5 @@
-﻿using Windows.UI.Core;
+﻿using System.Diagnostics;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -50,6 +51,15 @@ namespace CollegeOrganiser
                 e.Handled = true;
                 rootFrame.GoBack();
             }
+        }
+
+        // Populates the Percentage completed dropdown box with values
+        private void percentComplete_DropDownOpened(object sender, object e)
+        {
+            for (int i = 5; i <= 100; i += 5)
+            {
+                percentComplete.Items.Add(i);
+            }     
         }
     }
 }

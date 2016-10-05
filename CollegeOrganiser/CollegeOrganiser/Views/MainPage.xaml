@@ -14,9 +14,10 @@
                    Margin="0 30 60 0"
                    FontSize="32" FontWeight="Bold">College Organiser
         </TextBlock>
-        <StackPanel x:Name="sptextBlock" VerticalAlignment="Bottom"
+        <StackPanel x:Name="sptextBlock" 
+                    VerticalAlignment="Bottom"
                     Margin="0 0 0 50"
-                    HorizontalAlignment="Center" >
+                    HorizontalAlignment="Center">
             <TextBlock x:Name="titleTextBlock" 
                        Margin="170 0 0 0"
                        x:Uid="uidTitleTextBlock"

@@ -6,7 +6,7 @@
     RequestedTheme="Light">
     
     <Application.Resources>
-        <ImageBrush x:Key="bookBrush" ImageSource="Images/books.jpeg" Stretch="None" />
+        <ImageBrush x:Key="bookBrush" ImageSource="Images/books.jpeg" Stretch="Fill" Opacity="0.35" />
     </Application.Resources>
 
 </Application>
