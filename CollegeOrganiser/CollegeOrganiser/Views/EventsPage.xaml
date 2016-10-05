@@ -18,25 +18,36 @@
                        Foreground="Brown" />
         </StackPanel>
 
-        <StackPanel Margin="10 60 10 0" Width="Auto" Height="Auto">
-            <StackPanel Width="Auto" Background="LightGray" Padding="10">
+        <StackPanel Margin="10 60 10 0" 
+                    Width="Auto" 
+                    Height="Auto">
+            <StackPanel Width="Auto" 
+                        Background="LightGray" 
+                        Padding="10">
                 <TextBox PlaceholderText="Module Title" />
-                <TextBox Margin="0 10 0 0" PlaceholderText="Event / Task / Detail" />
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBox Margin="0 10 0 0" 
+                         PlaceholderText="Event / Task / Detail" />
+                <StackPanel Orientation="Horizontal" 
+                            HorizontalAlignment="Left">
                     <ComboBox Margin="0 10 0 0" 
                               x:Name="percentComplete" 
                               PlaceholderText="0" 
                               DropDownOpened="percentComplete_DropDownOpened" />
-                    <TextBlock VerticalAlignment="Center" Margin="10 8 0 0" Text="% Completed"/>
+                    <TextBlock VerticalAlignment="Center" 
+                               Margin="10 8 0 0" 
+                               Text="% Completed"/>
                 </StackPanel>
-                <DatePicker x:Name="datePickerCombo" Margin="0 10 0 0" Width="Auto" />
+                <DatePicker x:Name="datePickerCombo" 
+                            Margin="0 10 0 0" 
+                            Width="Auto" />
             </StackPanel>
-                
-            <ListBox x:Name="viewEvents">
-            </ListBox>
-            
+            <ListBox x:Name="retrieveData" 
+                     HorizontalAlignment="Center" 
+                     VerticalAlignment="Bottom"
+                     Width="Auto" 
+                     Height="275" 
+                     Margin="0 10 0 0" />
         </StackPanel>
-        
     </Grid>
     <Page.BottomAppBar>
         <AppBar IsOpen="True" IsSticky="True">
