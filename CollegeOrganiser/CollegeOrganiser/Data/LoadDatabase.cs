@@ -10,19 +10,34 @@ namespace CollegeOrganiser.Data
         private string path;
         private SQLite.Net.SQLiteConnection conn;
 
-        //public LoadDatabase()
-        //{
-        //    path = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "db.collegeOrganiser");
-        //}
+        public LoadDatabase()
+        {
+            setPath();
+            dbConnection();
+            conn.CreateTable<Event>();
+            // closeDBconnection();
+        }
+
+        // Set the path to the sqlite database
+        public void setPath()
+        {
+            path = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "db.collegeOrganiser");
+        }
 
         public void dbConnection()
         {
             conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), path);
-            path = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "db.collegeOrganiser");
             #if DEBUG
-                Debug.WriteLine(path);
+                Debug.WriteLine(path); // Console write the path, for testing purposes
             #endif
-            // conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), path);
+        }
+
+        // Close / Dispose the DB connections for each operation
+        public void closeDBconnection()
+        {
+            conn.Commit();
+            conn.Dispose();
+            conn.Close();
         }
     }
 }

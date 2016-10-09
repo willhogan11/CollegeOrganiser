@@ -98,7 +98,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Event.cs" />
     <Compile Include="Data\LoadDatabase.cs" />
+    <Compile Include="Data\Meeting.cs" />
     <Compile Include="Views\EventsPage.xaml.cs">
       <DependentUpon>EventsPage.xaml</DependentUpon>
     </Compile>
