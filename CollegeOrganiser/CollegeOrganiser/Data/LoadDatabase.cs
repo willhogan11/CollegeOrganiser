@@ -1,7 +1,6 @@
 ﻿using System.IO;
 using System.Diagnostics;
 
-
 namespace CollegeOrganiser.Data
 {
     public class LoadDatabase
@@ -15,7 +14,8 @@ namespace CollegeOrganiser.Data
             setPath();
             dbConnection();
             conn.CreateTable<Event>();
-            // closeDBconnection();
+            Debug.WriteLine(conn);
+            // closeDBconnection(); // Need to be careful here, connection needs to be closed after transaction is completed and not now. 
         }
 
         // Set the path to the sqlite database

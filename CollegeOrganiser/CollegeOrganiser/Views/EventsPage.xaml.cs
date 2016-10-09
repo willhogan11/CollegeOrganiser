@@ -12,6 +12,7 @@ namespace CollegeOrganiser
     /// </summary>
     public sealed partial class EventsPage : Page
     {
+        
         public EventsPage()
         {
             this.InitializeComponent();
