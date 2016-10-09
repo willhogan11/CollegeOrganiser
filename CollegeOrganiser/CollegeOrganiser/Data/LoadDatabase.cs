@@ -8,7 +8,7 @@ namespace CollegeOrganiser.Data
     {
         // Instance Variables that are required to Setup a path and a new sqlite Database connection
         private string path;
-        // private SQLite.Net.SQLiteConnection conn;
+        private SQLite.Net.SQLiteConnection conn;
 
         //public LoadDatabase()
         //{
@@ -17,6 +17,7 @@ namespace CollegeOrganiser.Data
 
         public void dbConnection()
         {
+            conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), path);
             path = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "db.collegeOrganiser");
             #if DEBUG
                 Debug.WriteLine(path);
