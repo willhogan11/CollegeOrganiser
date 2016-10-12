@@ -1,4 +1,5 @@
-﻿using Windows.UI.Core;
+﻿using CollegeOrganiser.Data;
+using Windows.UI.Core;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
@@ -13,6 +14,8 @@ namespace CollegeOrganiser
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        LoadDatabase loadDataBase;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -28,6 +31,13 @@ namespace CollegeOrganiser
         private void Page_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Frame.Navigate(typeof(MenuPage));
+        }
+
+        // Triggers the Sqlite Database and Table creation, defined in the loadDatabase.cs class in the Data Folder
+        private void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            loadDataBase = new LoadDatabase();
+            loadDataBase.dbConnection();
         }
     }
 }

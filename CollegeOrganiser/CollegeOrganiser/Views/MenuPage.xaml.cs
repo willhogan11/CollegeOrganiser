@@ -57,8 +57,6 @@ namespace CollegeOrganiser
 
         private void EventsButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            loadDataBase = new LoadDatabase();
-            loadDataBase.dbConnection();
             Frame.Navigate(typeof(EventsPage));
         }
 

@@ -6,7 +6,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Tapped="Page_Tapped">
+    Tapped="Page_Tapped"
+    Loaded="Page_Loaded">
 
     <Grid x:Name="LayoutRoot" Background="{StaticResource bookBrush}">
         <TextBlock HorizontalAlignment="Center"
@@ -18,7 +19,7 @@
                     VerticalAlignment="Bottom"
                     Margin="0 0 0 50"
                     HorizontalAlignment="Center">
-            <TextBlock x:Name="titleTextBlock" 
+            <TextBlock x:Name="titleTextBlock"    
                        Margin="170 0 0 0"
                        x:Uid="uidTitleTextBlock"
                        HorizontalAlignment="Center"
