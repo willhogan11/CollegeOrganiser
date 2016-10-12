@@ -15,9 +15,14 @@ namespace CollegeOrganiser.Data
             dbConnection();
             conn.CreateTable<Event>();
             conn.CreateTable<Meeting>();
-            Debug.WriteLine(conn);
+            
+            #if DEBUG
+                Debug.WriteLine(conn);
+            #endif
+            
             // closeDBconnection(); // Need to be careful here, connection needs to be closed after transaction is completed and not now. 
         }
+
 
         // Set the path to the sqlite database
         public void setPath()

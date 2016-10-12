@@ -1,4 +1,5 @@
-﻿using Windows.UI.Core;
+﻿using System.Diagnostics;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -53,13 +54,18 @@ namespace CollegeOrganiser
             }
         }
 
-        // Populates the Percentage completed dropdown box with values
+        // Populates the Percentage completed dropdown box with values incrementing in 5's
         private void percentComplete_DropDownOpened(object sender, object e)
         {
             for (int i = 5; i <= 100; i += 5)
             {
                 percentComplete.Items.Add(i);
             }     
+        }
+
+        public void Add_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            Debug.WriteLine("Test");
         }
     }
 }

@@ -54,7 +54,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="Auto">
                 <AppBarButton x:Name="Show" x:Uid="uidShow" Icon="Zoom" />
                 <AppBarButton x:Name="Accept" x:Uid="uidAccept" Icon="Accept" />
-                <AppBarButton x:Name="Add" x:Uid="uidAdd" Icon="Add" />
+                <AppBarButton x:Name="Add" x:Uid="uidAdd" Icon="Add" Tapped="Add_Tapped"/>
                 <AppBarButton x:Name="Delete" x:Uid="uidDelete" IsEnabled="False" Icon="Remove" />
                 <AppBarButton x:Name="DeleteAll" x:Uid="uidDeleteAll" IsEnabled="False" Icon="Delete" />
                 <AppBarButton x:Name="Flag" x:Uid="uidFlag" Icon="Flag" />
