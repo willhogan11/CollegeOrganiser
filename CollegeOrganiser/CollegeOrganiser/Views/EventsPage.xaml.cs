@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using CollegeOrganiser.Data;
+using System.Diagnostics;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -13,7 +14,9 @@ namespace CollegeOrganiser
     /// </summary>
     public sealed partial class EventsPage : Page
     {
-        
+        LoadDatabase loadDatabase;
+        private SQLite.Net.SQLiteConnection conn;
+
         public EventsPage()
         {
             this.InitializeComponent();
@@ -65,7 +68,14 @@ namespace CollegeOrganiser
 
         public void Add_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            Debug.WriteLine("Test");
+            loadDatabase = new LoadDatabase();
+            loadDatabase.dbConnection();
+            loadDatabase.setPath();
+
+            var addEvent = conn.Insert(new Event()
+            {
+                module = moduleTitleTextBox.Text
+            });
         }
     }
 }

@@ -20,7 +20,7 @@ namespace CollegeOrganiser.Data
                 Debug.WriteLine(conn);
             #endif
             
-            // closeDBconnection(); // Need to be careful here, connection needs to be closed after transaction is completed and not now. 
+            closeDBconnection(); // Need to be careful here, connection needs to be closed after transaction is completed and not now. 
         }
 
 

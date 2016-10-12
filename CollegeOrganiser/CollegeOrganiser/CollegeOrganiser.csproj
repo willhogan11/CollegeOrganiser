@@ -98,9 +98,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Data\Event.cs" />
+    <Compile Include="Models\Event.cs" />
     <Compile Include="Data\LoadDatabase.cs" />
-    <Compile Include="Data\Meeting.cs" />
+    <Compile Include="Models\Meeting.cs" />
     <Compile Include="ViewModels\EventViewModel.cs" />
     <Compile Include="Views\EventsPage.xaml.cs">
       <DependentUpon>EventsPage.xaml</DependentUpon>
@@ -155,9 +155,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <SDKReference Include="SQLite.UAP.2015, Version=3.10.2">
       <Name>SQLite for Universal App Platform</Name>
