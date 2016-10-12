@@ -1,33 +1,26 @@
-﻿using CollegeOrganiser.Data;
-using CollegeOrganiser.CollegeOrganiser_XamlTypeInfo;
-using System;
-
+﻿
 namespace CollegeOrganiser.ViewModels
 {
     public class EventViewModel
     {
         //LoadDatabase loadDatabase;
         //private SQLite.Net.SQLiteConnection conn;
+        
 
         //public void addEvent()
         //{
+        //    loadDatabase = new LoadDatabase();
+        //    loadDatabase.dbConnection();
+        //    loadDatabase.setPath();
+
+        //    var frm1 = new EventsPage();
+
         //    var addEvent = conn.Insert(new Event()
         //    {
-        //        module = moduleTitleTextBox.Text,
-        //        itemQuantity = Convert.ToInt32(quantityTextBlock.Text),
-        //        itemPrice = Convert.ToDouble(priceTextBlock.Text)
+        //        module = frm1.ModuleTitleTextBox
+        //        // module = moduleTitleTextBox.Text
         //    });
+        //    Debug.WriteLine("Test Insert");
         //}
     }
-
-    //public class Test
-    //{
-    //    EventViewModel eventViewModel;
-       
-    //    public void testMethod()
-    //    {
-    //        eventViewModel = new EventViewModel();
-    //        eventViewModel.addEvent();
-    //    }
-    //}
 }

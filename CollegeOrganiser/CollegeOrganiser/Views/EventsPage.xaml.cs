@@ -1,11 +1,12 @@
 ﻿using CollegeOrganiser.Data;
+using System;
 using System.Diagnostics;
+using System.IO;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace CollegeOrganiser
 {
@@ -14,7 +15,7 @@ namespace CollegeOrganiser
     /// </summary>
     public sealed partial class EventsPage : Page
     {
-        LoadDatabase loadDatabase;
+        private string path;
         private SQLite.Net.SQLiteConnection conn;
 
         public EventsPage()
@@ -60,22 +61,49 @@ namespace CollegeOrganiser
         // Populates the Percentage completed dropdown box with values incrementing in 5's
         private void percentComplete_DropDownOpened(object sender, object e)
         {
-            for (int i = 5; i <= 100; i += 5)
-            {
-                percentComplete.Items.Add(i);
-            }     
+            //for (int i = 5; i <= 100; i += 5)
+            //{
+            //    percentCompleteComboBox.Items.Add(i);
+            //}     
         }
 
         public void Add_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-            loadDatabase = new LoadDatabase();
-            loadDatabase.dbConnection();
-            loadDatabase.setPath();
-
+            dbConnection();
             var addEvent = conn.Insert(new Event()
             {
-                module = moduleTitleTextBox.Text
+                module = moduleTitleTextBox.Text,
+                eventTask = eventNameTextBox.Text,
+                percentComplete = Convert.ToInt32(percentCompleteComboBox.SelectedItem),
+                deadline = datePickerCombo.DataContext
+                // deadline = (DateTime)datePickerCombo.DataContext
+
             });
+        }
+
+        private void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            for (int i = 5; i <= 100; i += 5)
+            {
+                percentCompleteComboBox.Items.Add(i);
+            }
+        }
+
+
+        public void dbConnection()
+        {
+            path = Path.Combine(Windows.Storage.ApplicationData.Current.LocalFolder.Path, "db.collegeOrganiser");
+            conn = new SQLite.Net.SQLiteConnection(new SQLite.Net.Platform.WinRT.SQLitePlatformWinRT(), path);
+            Debug.WriteLine("Test");
+        }
+
+
+        // Close / Dispose the DB connections for each operation
+        public void closeDBconnection()
+        {
+            conn.Commit();
+            conn.Dispose();
+            conn.Close();
         }
     }
 }

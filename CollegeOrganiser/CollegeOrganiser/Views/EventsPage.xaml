@@ -5,6 +5,7 @@
     xmlns:local="using:CollegeOrganiser"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Loaded="Page_Loaded"
     mc:Ignorable="d">
 
     <Grid x:Name="LayoutRoot" Background="{StaticResource bookBrush}">
@@ -27,19 +28,20 @@
                 <TextBox PlaceholderText="Module Title"
                          x:Name="moduleTitleTextBox" />
                 <TextBox Margin="0 10 0 0" 
+                         x:Name="eventNameTextBox"
                          PlaceholderText="Event / Task / Detail" />
                 <StackPanel Orientation="Horizontal" 
                             HorizontalAlignment="Left">
                     <ComboBox Margin="0 10 0 0" 
-                              x:Name="percentComplete" 
-                              PlaceholderText="0" 
-                              DropDownOpened="percentComplete_DropDownOpened" />
+                              x:Name="percentCompleteComboBox" 
+                              PlaceholderText="0" />
                     <TextBlock VerticalAlignment="Center" 
                                Margin="10 8 0 0" 
                                Text="% Completed"/>
                 </StackPanel>
                 <DatePicker x:Name="datePickerCombo" 
-                            Margin="0 10 0 0" 
+                            Margin="0 10 0 0"
+                            Header="Deadline"
                             Width="Auto" />
             </StackPanel>
             <ListBox x:Name="retrieveData" 
