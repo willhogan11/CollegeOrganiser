@@ -14,6 +14,7 @@ namespace CollegeOrganiser.Data
             setPath();
             dbConnection();
             conn.CreateTable<Event>();
+            conn.CreateTable<Meeting>();
             Debug.WriteLine(conn);
             // closeDBconnection(); // Need to be careful here, connection needs to be closed after transaction is completed and not now. 
         }
