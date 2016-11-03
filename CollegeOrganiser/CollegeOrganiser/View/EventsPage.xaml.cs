@@ -91,7 +91,7 @@ namespace CollegeOrganiser.View
         {
             try
             {
-                var eventDetails = new Event
+                var evntDetails = new Event
                 {
                     Module = moduleTitleTextBox.Text,
                     EventDetail = eventNameTextBox.Text,
@@ -100,12 +100,12 @@ namespace CollegeOrganiser.View
 
                 moduleTitleTextBox.Text = "";
                 eventNameTextBox.Text = "";
-                displayTaskList();
-                await InsertEvent(eventDetails);
+                await InsertEvent(evntDetails);
             }
             catch (Exception ex)
             {
                 Debug.WriteLine("Exception of this type " + ex);
+                throw;
             }
         }
     }
