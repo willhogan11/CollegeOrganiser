@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+
 
 namespace CollegeOrganiser
 {
@@ -12,6 +14,9 @@ namespace CollegeOrganiser
     /// </summary>
     sealed partial class App : Application
     {
+        // Create an Instance of the Mobile Service that allows connection to Azure Cloud. 
+        public static MobileServiceClient MobileService = new MobileServiceClient("https://gmitmobileapp.azurewebsites.net");
+
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
