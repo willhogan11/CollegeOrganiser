@@ -1,19 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using Microsoft.WindowsAzure.MobileServices;
+using System;
+using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+using System.Diagnostics;
+using CollegeOrganiser.DataModel;
+
+
+// #define OFFLINE_SYNC_ENABLED
+
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
+
+
+#if OFFLINE_SYNC_ENABLED
+    using Microsoft.WindowsAzure.MobileServices.SQLiteStore;  // offline sync
+    using Microsoft.WindowsAzure.MobileServices.Sync;         // offline sync
+#endif
+
 
 namespace CollegeOrganiser.View
 {
@@ -22,9 +26,87 @@ namespace CollegeOrganiser.View
     /// </summary>
     public sealed partial class EventsPage : Page
     {
+        private MobileServiceCollection<Event, Event> events;
+
+#if OFFLINE_SYNC_ENABLED
+        private IMobileServiceSyncTable<TodoItem> eventTable = App.MobileService.GetSyncTable<TodoItem>(); // offline sync
+        // private IMobileServiceSyncTable<Event> eventTable = App.MobileService.GetSyncTable<Event>(); // offline sync
+#else
+        private IMobileServiceTable<Event> eventTable = App.MobileService.GetTable<Event>();
+        // private IMobileServiceTable<Event> eventTable = App.MobileService.GetTable<Event>();
+#endif
+
         public EventsPage()
         {
             this.InitializeComponent();
+        }
+
+
+        private async Task InsertEvent(Event eventDetail)
+        {
+            // This code inserts a new TodoItem into the database. After the operation completes
+            // and the mobile app backend has assigned an id, the item is added to the CollectionView.
+            await eventTable.InsertAsync(eventDetail);
+            events.Add(eventDetail);
+
+#if OFFLINE_SYNC_ENABLED
+            await App.MobileService.SyncContext.PushAsync(); // offline sync
+#endif
+        }
+
+
+        public void displayTaskList()
+        {
+            string debugValues = "";
+            int counter = 0;
+
+            foreach (var evnt in events)
+            {
+                counter++;
+                debugValues = string.Format("No: " + counter + " Module: " + evnt.Module + " EventDetail: " + evnt.EventDetail);
+                Debug.WriteLine(debugValues);
+            }
+        }
+
+
+        // Method that listens for any any keydown event on the "Add" button 
+        private void moduleTitleTextBox_KeyDown(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
+        {
+            if (e.Key == Windows.System.VirtualKey.Enter)
+            {
+                Add.Focus(FocusState.Programmatic);
+            }
+        }
+
+        // On page load, loads percentage completed values into the percentageCompleted comboBox
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            for (int i = 5; i <= 100; i += 5)
+            {
+                percentCompleteComboBox.Items.Add(i);
+            }
+        }
+
+        private async void Add_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var eventDetails = new Event
+                {
+                    Module = moduleTitleTextBox.Text,
+                    EventDetail = eventNameTextBox.Text,
+                    PercentComplete = Convert.ToInt32(percentCompleteComboBox.SelectedItem)
+                };
+
+                moduleTitleTextBox.Text = "";
+                eventNameTextBox.Text = "";
+                displayTaskList();
+                await InsertEvent(eventDetails);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("Exception of this type " + ex);
+            }
         }
     }
 }
