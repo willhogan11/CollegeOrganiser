@@ -12,7 +12,7 @@
         <TextBlock HorizontalAlignment="Center"
                    FontFamily="Century-Gothic"
                    Margin="0 30 60 0"
-                   FontSize="32" FontWeight="Bold">College Organiser
+                   FontSize="32" FontWeight="ExtraBold">College Organiser
         </TextBlock>
         <StackPanel x:Name="sptextBlock" 
                     VerticalAlignment="Bottom"
