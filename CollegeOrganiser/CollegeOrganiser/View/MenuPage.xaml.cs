@@ -65,7 +65,7 @@ namespace CollegeOrganiser.View
 
         private void EventsButton_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
-           //  Frame.Navigate(typeof(EventsPage));
+           Frame.Navigate(typeof(EventsPage));
         }
     }
 }
