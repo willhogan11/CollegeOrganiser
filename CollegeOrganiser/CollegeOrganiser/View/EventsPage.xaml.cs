@@ -135,11 +135,30 @@ namespace CollegeOrganiser.View
                 percentCompleteComboBox.SelectedItem = 0;
                 await InsertEvent(eventDetails);
             }
-            catch (Exception ex)
-            {
-                Debug.WriteLine("Exception of this type " + ex);
-                throw;
-            }
+            catch (Exception)
+            { }
+        }
+
+
+        private async Task UpdateCheckedEventDetails(Event eventDetails)
+        {
+            // This code takes a freshly completed TodoItem and updates the database.
+            // After the MobileService client responds, the item is removed from the list.
+            await eventTable.UpdateAsync(eventDetails);
+            events.Remove(eventDetails);
+            EventDetails.Focus(Windows.UI.Xaml.FocusState.Unfocused);
+
+#if OFFLINE_SYNC_ENABLED
+            await App.MobileService.SyncContext.PushAsync(); // offline sync
+#endif
+        }
+
+
+        private async void CheckBoxComplete_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox cb = (CheckBox)sender;
+            Event events = cb.DataContext as Event;
+            await UpdateCheckedEventDetails(events);
         }
     }
 }
