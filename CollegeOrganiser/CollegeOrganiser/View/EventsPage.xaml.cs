@@ -5,6 +5,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using System.Diagnostics;
 using CollegeOrganiser.DataModel;
+using Windows.UI.Popups;
 
 
 // #define OFFLINE_SYNC_ENABLED
@@ -42,17 +43,48 @@ namespace CollegeOrganiser.View
         }
 
 
-        private async Task InsertEvent(Event eventDetail)
+        private async Task InsertEvent(Event eventDetails)
         {
             // This code inserts a new TodoItem into the database. After the operation completes
             // and the mobile app backend has assigned an id, the item is added to the CollectionView.
-            await eventTable.InsertAsync(eventDetail);
-            events.Add(eventDetail);
+            await eventTable.InsertAsync(eventDetails);
+            events.Add(eventDetails);
 
 #if OFFLINE_SYNC_ENABLED
             await App.MobileService.SyncContext.PushAsync(); // offline sync
 #endif
         }
+
+
+        private async Task RefreshEventDetails()
+        {
+            MobileServiceInvalidOperationException exception = null;
+            try
+            {
+                // This code refreshes the entries in the list view by querying the TodoItems table.
+                // The query excludes completed TodoItems.
+                events = await eventTable
+                    .Where(eventDetails => eventDetails.Complete == false)
+                    .ToCollectionAsync();
+
+                // displayTaskList();
+            }
+            catch (MobileServiceInvalidOperationException e)
+            {
+                exception = e;
+            }
+
+            if (exception != null)
+            {
+                await new MessageDialog(exception.Message, "Error loading items").ShowAsync();
+            }
+            else
+            {
+                EventDetails.ItemsSource = events;
+                // this.ButtonSave.IsEnabled = true;
+            }
+        }
+
 
 
         public void displayTaskList()
@@ -91,7 +123,7 @@ namespace CollegeOrganiser.View
         {
             try
             {
-                var evntDetails = new Event
+                var eventDetails = new Event
                 {
                     Module = moduleTitleTextBox.Text,
                     EventDetail = eventNameTextBox.Text,
@@ -100,7 +132,8 @@ namespace CollegeOrganiser.View
 
                 moduleTitleTextBox.Text = "";
                 eventNameTextBox.Text = "";
-                await InsertEvent(evntDetails);
+                percentCompleteComboBox.SelectedItem = 0;
+                await InsertEvent(eventDetails);
             }
             catch (Exception ex)
             {
