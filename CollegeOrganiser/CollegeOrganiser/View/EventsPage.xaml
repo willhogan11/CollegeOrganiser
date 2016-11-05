@@ -22,7 +22,7 @@
         <StackPanel Margin="10 60 10 0" 
                     Width="Auto" 
                     Height="Auto">
-            <StackPanel Width="Auto" 
+            <StackPanel BorderThickness="2" BorderBrush="Black" Width="Auto" 
                         Background="LightGray" 
                         Padding="10">
                 <TextBox PlaceholderText="Module Title"
@@ -47,46 +47,49 @@
                             Header="Deadline"
                             Width="Auto" />
             </StackPanel>
-            <!--<ListBox x:Name="retrieveData" 
-                     HorizontalAlignment="Center" 
-                     VerticalAlignment="Bottom"
-                     Width="Auto" 
-                     Height="275" 
-                     Margin="0 10 0 0" />-->
 
-            <ScrollViewer Margin="0,10,0,0" Height="300"
-                          ScrollViewer.VerticalScrollBarVisibility="Visible" 
-                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                <ListView x:Name="EventDetails">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <CheckBox x:Name="CheckBoxComplete" 
-                                          IsChecked="{Binding Complete, Mode=TwoWay}" 
-                                          Checked="CheckBoxComplete_Checked"
-                                          MaxWidth="550"
-                                          VerticalAlignment="Center">
-                                <StackPanel Orientation="Vertical">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock>Module</TextBlock>
-                                        <TextBlock Name="ItemText" Text="{Binding Module}" MaxWidth="550" />
-                                    </StackPanel>
-                                    <TextBlock></TextBlock>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock>Event Detail:</TextBlock>
-                                        <TextBlock Name="ModuleText" Text="{Binding EventDetail}" MaxWidth="550" TextWrapping="WrapWholeWords"/>
-                                    </StackPanel>
-                                    <TextBlock></TextBlock>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock>% Complete:</TextBlock>
-                                        <TextBlock Name="PercentCompleteText" Text="{Binding PercentComplete}" MaxWidth="550" TextWrapping="WrapWholeWords"/>
-                                    </StackPanel>
-                                </StackPanel>
-                            </CheckBox>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </ScrollViewer>
+            <Grid x:Name="ItemsGrid" Grid.Row="2" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="500"/>
+                </Grid.RowDefinitions>
 
+                <ScrollViewer Grid.Row="1" Margin="0,10,0,0" 
+                              ScrollViewer.VerticalScrollBarVisibility="Visible" 
+                              VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                    <ListView Height="1000" x:Name="EventDetails">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox x:Name="CheckBoxComplete" 
+                                              IsChecked="{Binding Complete, Mode=TwoWay}" 
+                                              Checked="CheckBoxComplete_Checked"
+                                              MaxWidth="550"
+                                              VerticalAlignment="Center">
+                                    <StackPanel Orientation="Vertical">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontFamily="Century Gothic" FontWeight="Bold" Foreground="Blue">Module:  </TextBlock>
+                                            <TextBlock FontFamily="Century Gothic" Name="ItemText" Text="{Binding Module}" MaxWidth="550" />
+                                        </StackPanel>
+                                        <TextBlock></TextBlock>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock FontFamily="Century Gothic" FontWeight="Bold" Foreground="Blue">Event Detail:  </TextBlock>
+                                            <TextBlock FontFamily="Century Gothic" Name="ModuleText" Text="{Binding EventDetail}" MaxWidth="550" TextWrapping="WrapWholeWords"/>
+                                        </StackPanel>
+                                        <TextBlock></TextBlock>
+                                        <StackPanel  Orientation="Horizontal">
+                                            <TextBlock FontFamily="Century Gothic" FontWeight="Bold" Foreground="Blue">% Complete:   </TextBlock>
+                                            <TextBlock FontFamily="Century Gothic" Name="PercentCompleteText" Text="{Binding PercentComplete}" MaxWidth="550" TextWrapping="WrapWholeWords"/>
+                                        </StackPanel>
+                                        <TextBlock></TextBlock>
+                                        <TextBlock Name="CreateLineBreak">_________________________________________________________________________________________________</TextBlock>
+                                    </StackPanel>
+                                </CheckBox>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </ScrollViewer>
+            </Grid>
+            
         </StackPanel>
     </Grid>
     <Page.BottomAppBar>

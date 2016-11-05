@@ -7,6 +7,7 @@ using System.Diagnostics;
 using CollegeOrganiser.DataModel;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Documents;
 
 
 // #define OFFLINE_SYNC_ENABLED
@@ -57,6 +58,9 @@ namespace CollegeOrganiser.View
         }
 
 
+        
+
+
         private async Task RefreshEventDetails()
         {
             MobileServiceInvalidOperationException exception = null;
@@ -67,8 +71,10 @@ namespace CollegeOrganiser.View
                 events = await eventTable
                     .Where(eventDetails => eventDetails.Complete == false)
                     .ToCollectionAsync();
-
-                displayTaskList();
+#if DEBUG
+                // Very useful to track what's actually being sent to the database 
+                displayTaskList(); 
+#endif
             }
             catch (MobileServiceInvalidOperationException e)
             {
@@ -86,25 +92,7 @@ namespace CollegeOrganiser.View
             }
         }
 
-
-
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {
-            try
-            {
-#if OFFLINE_SYNC_ENABLED
-                        await InitLocalStoreAsync(); // offline sync
-#endif
-                await RefreshEventDetails();
-            }
-            catch (Exception)
-            {
-                // ButtonRefresh_Click(this, null);
-            }
-        }
-
-
-
+        // For debug purposes: Prints to console all details of each Event being sent to database.
         public void displayTaskList()
         {
             string debugValues = "";
@@ -129,12 +117,14 @@ namespace CollegeOrganiser.View
         }
 
         // On page load, loads percentage completed values into the percentageCompleted comboBox
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        // and also Refreshes the Event Details Listview with Database values that currently exist on Azure
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             for (int i = 5; i <= 100; i += 5)
             {
                 percentCompleteComboBox.Items.Add(i);
             }
+            await RefreshEventDetails();
         }
 
         private async void Add_Click(object sender, RoutedEventArgs e)
