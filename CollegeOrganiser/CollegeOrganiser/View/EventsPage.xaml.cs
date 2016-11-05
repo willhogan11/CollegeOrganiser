@@ -6,6 +6,7 @@ using Windows.UI.Xaml.Controls;
 using System.Diagnostics;
 using CollegeOrganiser.DataModel;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Navigation;
 
 
 // #define OFFLINE_SYNC_ENABLED
@@ -67,7 +68,7 @@ namespace CollegeOrganiser.View
                     .Where(eventDetails => eventDetails.Complete == false)
                     .ToCollectionAsync();
 
-                // displayTaskList();
+                displayTaskList();
             }
             catch (MobileServiceInvalidOperationException e)
             {
@@ -81,7 +82,24 @@ namespace CollegeOrganiser.View
             else
             {
                 EventDetails.ItemsSource = events;
-                // this.ButtonSave.IsEnabled = true;
+                this.Add.IsEnabled = true;
+            }
+        }
+
+
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            try
+            {
+#if OFFLINE_SYNC_ENABLED
+                        await InitLocalStoreAsync(); // offline sync
+#endif
+                await RefreshEventDetails();
+            }
+            catch (Exception)
+            {
+                // ButtonRefresh_Click(this, null);
             }
         }
 
