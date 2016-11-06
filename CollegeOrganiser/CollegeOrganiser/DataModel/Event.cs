@@ -12,8 +12,11 @@ namespace CollegeOrganiser.DataModel
         [JsonProperty(PropertyName = "eventDetails")]
         public string EventDetail { get; set; }
 
-        [JsonProperty(PropertyName = "percentComplete")]
-        public int PercentComplete { get; set; }
+        [JsonProperty(PropertyName = "priority")]
+        public string PriorityState { get; set; }
+
+        [JsonProperty(PropertyName = "percentOfModule")]
+        public int PercentOfModule { get; set; }
 
         [JsonProperty(PropertyName = "complete")]
         public bool Complete { get; set; }

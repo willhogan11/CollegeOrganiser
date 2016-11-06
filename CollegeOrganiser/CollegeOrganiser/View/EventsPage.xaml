@@ -22,7 +22,7 @@
         <StackPanel Margin="10 60 10 0" 
                     Width="Auto" 
                     Height="Auto">
-            <StackPanel BorderThickness="2" BorderBrush="Black" Width="Auto" 
+            <StackPanel BorderThickness="2" BorderBrush="DarkGray" Width="Auto" 
                         Background="LightGray" 
                         Padding="10">
                 <TextBox PlaceholderText="Module Title"
@@ -35,12 +35,16 @@
                 <StackPanel Orientation="Horizontal" 
                             HorizontalAlignment="Left">
                     <ComboBox Margin="0 10 0 0" 
-                              x:Name="percentCompleteComboBox" 
+                              x:Name="percentOfModuleComboBox" 
                               PlaceholderText="0" 
                               KeyDown="moduleTitleTextBox_KeyDown" />
                     <TextBlock VerticalAlignment="Center" 
                                Margin="10 8 0 0" 
-                               Text="% Completed" />
+                               Text="% Of Module" />
+                    <ComboBox x:Name="priorityLevelComboBox" 
+                              Margin="10 10 0 0" 
+                              PlaceholderText="Priority Level" 
+                              KeyDown="moduleTitleTextBox_KeyDown" />
                 </StackPanel>
                 <DatePicker x:Name="datePickerCombo" 
                             Margin="0 10 0 0"
@@ -57,7 +61,7 @@
                 <ScrollViewer Grid.Row="1" Margin="0,10,0,0" 
                               ScrollViewer.VerticalScrollBarVisibility="Visible" 
                               VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-                    <ListView Height="1000" x:Name="EventDetails">
+                    <ListView Height="3000" x:Name="EventDetails">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <CheckBox x:Name="CheckBoxComplete" 
@@ -77,8 +81,13 @@
                                         </StackPanel>
                                         <TextBlock></TextBlock>
                                         <StackPanel  Orientation="Horizontal">
-                                            <TextBlock FontFamily="Century Gothic" FontWeight="Bold" Foreground="Blue">% Complete:   </TextBlock>
-                                            <TextBlock FontFamily="Century Gothic" Name="PercentCompleteText" Text="{Binding PercentComplete}" MaxWidth="550" TextWrapping="WrapWholeWords"/>
+                                            <TextBlock FontFamily="Century Gothic" FontWeight="Bold" Foreground="Blue">% of Module:   </TextBlock>
+                                            <TextBlock FontFamily="Century Gothic" Name="PercentOfModuleText" Text="{Binding PercentOfModule}" MaxWidth="550" TextWrapping="WrapWholeWords"/>
+                                        </StackPanel>
+                                        <TextBlock></TextBlock>
+                                        <StackPanel  Orientation="Horizontal">
+                                            <TextBlock FontFamily="Century Gothic" FontWeight="Bold" Foreground="Blue">Priority Level:</TextBlock>
+                                            <TextBlock FontFamily="Century Gothic" Name="priorityLevel" Text="{Binding PriorityState}" MaxWidth="550" TextWrapping="WrapWholeWords"/>
                                         </StackPanel>
                                         <TextBlock></TextBlock>
                                         <TextBlock Name="CreateLineBreak">_________________________________________________________________________________________________</TextBlock>

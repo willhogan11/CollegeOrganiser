@@ -8,6 +8,7 @@ using CollegeOrganiser.DataModel;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Documents;
+using System.Collections.Generic;
 
 
 // #define OFFLINE_SYNC_ENABLED
@@ -57,10 +58,6 @@ namespace CollegeOrganiser.View
 #endif
         }
 
-
-        
-
-
         private async Task RefreshEventDetails()
         {
             MobileServiceInvalidOperationException exception = null;
@@ -101,7 +98,7 @@ namespace CollegeOrganiser.View
             foreach (var evnt in events)
             {
                 counter++;
-                debugValues = string.Format("No: " + counter + " Module: " + evnt.Module + " EventDetail: " + evnt.EventDetail);
+                debugValues = string.Format("No: " + counter + " Module: " + evnt.Module + " EventDetail: " + evnt.EventDetail + " % of Module " + evnt.PercentOfModule + " Priority Level " + evnt.PriorityState);
                 Debug.WriteLine(debugValues);
             }
         }
@@ -116,16 +113,30 @@ namespace CollegeOrganiser.View
             }
         }
 
+
+        public enum Priority
+        {  
+            URGENT, NORMAL, LOW, None
+        }
+
+
         // On page load, loads percentage completed values into the percentageCompleted comboBox
+        // and Adds each enum priority instance into the Priority comboBox
         // and also Refreshes the Event Details Listview with Database values that currently exist on Azure
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            for (int i = 5; i <= 100; i += 5)
+            foreach (Priority p in Enum.GetValues(typeof(Priority)))
             {
-                percentCompleteComboBox.Items.Add(i);
+                priorityLevelComboBox.Items.Add(p);
+            }
+
+            for (int i = 0; i <= 100; i += 5)
+            {
+                percentOfModuleComboBox.Items.Add(i);
             }
             await RefreshEventDetails();
         }
+
 
         private async void Add_Click(object sender, RoutedEventArgs e)
         {
@@ -135,12 +146,13 @@ namespace CollegeOrganiser.View
                 {
                     Module = moduleTitleTextBox.Text,
                     EventDetail = eventNameTextBox.Text,
-                    PercentComplete = Convert.ToInt32(percentCompleteComboBox.SelectedItem)
+                    PercentOfModule = Convert.ToInt32(percentOfModuleComboBox.SelectedItem),
+                    PriorityState = priorityLevelComboBox.SelectedItem.ToString()
                 };
 
                 moduleTitleTextBox.Text = "";
                 eventNameTextBox.Text = "";
-                percentCompleteComboBox.SelectedItem = 0;
+                percentOfModuleComboBox.SelectedItem = 0;
                 await InsertEvent(eventDetails);
             }
             catch (Exception)
