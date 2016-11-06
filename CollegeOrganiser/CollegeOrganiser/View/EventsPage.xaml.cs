@@ -1,4 +1,7 @@
-﻿using Microsoft.WindowsAzure.MobileServices;
+﻿
+#define OFFLINE_SYNC_ENABLED
+
+using Microsoft.WindowsAzure.MobileServices;
 using System;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
@@ -8,12 +11,7 @@ using CollegeOrganiser.DataModel;
 using Windows.UI.Popups;
 using static CollegeOrganiser.DataModel.EnumData;
 
-
-// #define OFFLINE_SYNC_ENABLED
-
-
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
-
 
 #if OFFLINE_SYNC_ENABLED
     using Microsoft.WindowsAzure.MobileServices.SQLiteStore;  // offline sync
@@ -31,7 +29,7 @@ namespace CollegeOrganiser.View
         private MobileServiceCollection<Event, Event> events;
 
 #if OFFLINE_SYNC_ENABLED
-        private IMobileServiceSyncTable<TodoItem> eventTable = App.MobileService.GetSyncTable<TodoItem>(); // offline sync
+        private IMobileServiceSyncTable<Event> eventTable = App.MobileService.GetSyncTable<Event>(); // offline sync
         // private IMobileServiceSyncTable<Event> eventTable = App.MobileService.GetSyncTable<Event>(); // offline sync
 #else
         private IMobileServiceTable<Event> eventTable = App.MobileService.GetTable<Event>();
@@ -66,10 +64,8 @@ namespace CollegeOrganiser.View
                 events = await eventTable
                     .Where(eventDetails => eventDetails.Complete == false)
                     .ToCollectionAsync();
-#if DEBUG
-                // Very useful to track what's actually being sent to the database 
+
                 displayTaskList(); 
-#endif
             }
             catch (MobileServiceInvalidOperationException e)
             {
@@ -111,15 +107,15 @@ namespace CollegeOrganiser.View
                 noPCount.Text = noCount.ToString();
                 totalCount.Text = totalCnt.ToString();
 
-#if DEBUG
-                debugValues = string.Format("No: " + totalCnt + " Module: " + evnt.Module + " EventDetail: " + evnt.EventDetail + " % of Module: " + evnt.PercentOfModule + " Priority Level: " + evnt.PriorityState + " Deadline:" + evnt.Deadline);
-                Debug.WriteLine(debugValues);
-                Debug.WriteLine("Urgent Count: " + urgCount);
-                Debug.WriteLine("Normal Count: " + normCount);
-                Debug.WriteLine("Low Count: " + lowCount);
-                Debug.WriteLine("No Priority Count: " + noCount);
-                Debug.WriteLine("Total Count: " + totalCnt);
-#endif
+                #if DEBUG
+                    debugValues = string.Format("No: " + totalCnt + " Module: " + evnt.Module + " EventDetail: " + evnt.EventDetail + " % of Module: " + evnt.PercentOfModule + " Priority Level: " + evnt.PriorityState + " Deadline:" + evnt.Deadline);
+                    Debug.WriteLine(debugValues);
+                    Debug.WriteLine("Urgent Count: " + urgCount);
+                    Debug.WriteLine("Normal Count: " + normCount);
+                    Debug.WriteLine("Low Count: " + lowCount);
+                    Debug.WriteLine("No Priority Count: " + noCount);
+                    Debug.WriteLine("Total Count: " + totalCnt);
+                #endif
             }
         }
 
@@ -177,6 +173,11 @@ namespace CollegeOrganiser.View
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             loadData();
+            
+
+#if OFFLINE_SYNC_ENABLED
+            await InitLocalStoreAsync(); // offline sync
+#endif
             await RefreshEventDetails();
         }
 
@@ -218,7 +219,6 @@ namespace CollegeOrganiser.View
             displayTaskList();
             EventDetails.Focus(Windows.UI.Xaml.FocusState.Unfocused);
             
-
 #if OFFLINE_SYNC_ENABLED
             await App.MobileService.SyncContext.PushAsync(); // offline sync
 #endif
@@ -230,8 +230,7 @@ namespace CollegeOrganiser.View
             CheckBox cb = (CheckBox)sender;
             Event events = cb.DataContext as Event;
             displayTaskList();
-            await UpdateCheckedEventDetails(events);
-            
+            await UpdateCheckedEventDetails(events);  
         }
 
 
@@ -244,5 +243,28 @@ namespace CollegeOrganiser.View
             await SyncAsync(); // offline sync
 #endif
         }
+
+
+        #region Offline sync
+#if OFFLINE_SYNC_ENABLED
+        private async Task InitLocalStoreAsync()
+        {
+            if (!App.MobileService.SyncContext.IsInitialized)
+            {
+                var store = new MobileServiceSQLiteStore("collegeOrganiser.db");
+                store.DefineTable<Event>();
+                await App.MobileService.SyncContext.InitializeAsync(store);
+            }
+
+            await SyncAsync();
+        }
+
+        private async Task SyncAsync()
+        {
+            await App.MobileService.SyncContext.PushAsync();
+            await eventTable.PullAsync("eventDetails", eventTable.CreateQuery());
+        }
+#endif
+        #endregion
     }
 }
