@@ -98,7 +98,7 @@ namespace CollegeOrganiser.View
             foreach (var evnt in events)
             {
                 counter++;
-                debugValues = string.Format("No: " + counter + " Module: " + evnt.Module + " EventDetail: " + evnt.EventDetail + " % of Module " + evnt.PercentOfModule + " Priority Level " + evnt.PriorityState);
+                debugValues = string.Format("No: " + counter + " Module: " + evnt.Module + " EventDetail: " + evnt.EventDetail + " % of Module: " + evnt.PercentOfModule + " Priority Level: " + evnt.PriorityState + " Deadline:" + evnt.Deadline);
                 Debug.WriteLine(debugValues);
             }
         }
@@ -114,9 +114,19 @@ namespace CollegeOrganiser.View
         }
 
 
-        public enum Priority
+        public enum PriorityEnum
         {  
             URGENT, NORMAL, LOW, None
+        }
+
+        public enum DayEnum
+        {
+            Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
+        }
+
+        public enum MonthEnum
+        {
+            January, February, March, April, May, June, July, August, September, October, November, December
         }
 
 
@@ -125,9 +135,32 @@ namespace CollegeOrganiser.View
         // and also Refreshes the Event Details Listview with Database values that currently exist on Azure
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            foreach (Priority p in Enum.GetValues(typeof(Priority)))
+            foreach (DayEnum day in Enum.GetValues(typeof(DayEnum)))
+            {
+                dayComboBox.Items.Add(day);
+            }
+
+            foreach (MonthEnum month in Enum.GetValues(typeof(MonthEnum)))
+            {
+                monthComboBox.Items.Add(month);
+            }
+
+            yearComboBox.Items.Add(2016);
+            yearComboBox.Items.Add(2017);
+            yearComboBox.Items.Add(2018);
+            yearComboBox.Items.Add(2019);
+            yearComboBox.Items.Add(2020);
+            yearComboBox.Items.Add(2021);
+            yearComboBox.Items.Add(2022);
+
+            foreach (PriorityEnum p in Enum.GetValues(typeof(PriorityEnum)))
             {
                 priorityLevelComboBox.Items.Add(p);
+            }
+
+            for (int i = 1; i <= 31; i++)
+            {
+                dayNumComboBox.Items.Add(i);
             }
 
             for (int i = 0; i <= 100; i += 5)
@@ -147,7 +180,11 @@ namespace CollegeOrganiser.View
                     Module = moduleTitleTextBox.Text,
                     EventDetail = eventNameTextBox.Text,
                     PercentOfModule = Convert.ToInt32(percentOfModuleComboBox.SelectedItem),
-                    PriorityState = priorityLevelComboBox.SelectedItem.ToString()
+                    PriorityState = priorityLevelComboBox.SelectedItem.ToString(), 
+                    Deadline = dayComboBox.SelectedItem.ToString() + " " 
+                             + dayNumComboBox.SelectedItem + " " 
+                             + monthComboBox.SelectedItem.ToString() + " " 
+                             + yearComboBox.SelectedItem.ToString()
                 };
 
                 moduleTitleTextBox.Text = "";
