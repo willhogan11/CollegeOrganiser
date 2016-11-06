@@ -1,5 +1,5 @@
 ﻿
-#define OFFLINE_SYNC_ENABLED
+// #define OFFLINE_SYNC_ENABLED
 
 using Microsoft.WindowsAzure.MobileServices;
 using System;
@@ -65,7 +65,7 @@ namespace CollegeOrganiser.View
                     .Where(eventDetails => eventDetails.Complete == false)
                     .ToCollectionAsync();
 
-                displayTaskList(); 
+                displayEventList(); 
             }
             catch (MobileServiceInvalidOperationException e)
             {
@@ -79,12 +79,11 @@ namespace CollegeOrganiser.View
             else
             {
                 EventDetails.ItemsSource = events;
-                this.Add.IsEnabled = true;
             }
         }
 
         // For debug purposes: Prints to console all details of each Event being sent to database.
-        public void displayTaskList()
+        public void displayEventList()
         {
             string debugValues = "";
             int urgCount = 0, normCount = 0, lowCnt = 0, noCount = 0, totalCnt = 0;
@@ -107,15 +106,16 @@ namespace CollegeOrganiser.View
                 noPCount.Text = noCount.ToString();
                 totalCount.Text = totalCnt.ToString();
 
-                #if DEBUG
-                    debugValues = string.Format("No: " + totalCnt + " Module: " + evnt.Module + " EventDetail: " + evnt.EventDetail + " % of Module: " + evnt.PercentOfModule + " Priority Level: " + evnt.PriorityState + " Deadline:" + evnt.Deadline);
-                    Debug.WriteLine(debugValues);
-                    Debug.WriteLine("Urgent Count: " + urgCount);
-                    Debug.WriteLine("Normal Count: " + normCount);
-                    Debug.WriteLine("Low Count: " + lowCount);
-                    Debug.WriteLine("No Priority Count: " + noCount);
-                    Debug.WriteLine("Total Count: " + totalCnt);
-                #endif
+
+#if DEBUG
+                debugValues = string.Format("No: " + totalCnt + " Module: " + evnt.Module + " EventDetail: " + evnt.EventDetail + " % of Module: " + evnt.PercentOfModule + " Priority Level: " + evnt.PriorityState + " Deadline:" + evnt.Deadline);
+                Debug.WriteLine(debugValues);
+                Debug.WriteLine("Urgent Count: " + urgCount);
+                Debug.WriteLine("Normal Count: " + normCount);
+                Debug.WriteLine("Low Count: " + lowCnt);
+                Debug.WriteLine("No Priority Count: " + noCount);
+                Debug.WriteLine("Total Count: " + totalCnt);
+#endif
             }
         }
 
@@ -202,7 +202,7 @@ namespace CollegeOrganiser.View
                 percentOfModuleComboBox.SelectedItem = 0;
 
                 await InsertEvent(eventDetails);
-                displayTaskList();
+                displayEventList();
             }
             catch (Exception)
             { }
@@ -211,14 +211,22 @@ namespace CollegeOrganiser.View
 
         private async Task UpdateCheckedEventDetails(Event eventDetails)
         {
-            // This code takes a freshly completed TodoItem and updates the database.
+            // This code takes a freshly completed Event Detail and updates the database.
             // After the MobileService client responds, the item is removed from the list.
-            
             await eventTable.UpdateAsync(eventDetails);
             events.Remove(eventDetails);
-            displayTaskList();
+            displayEventList();
             EventDetails.Focus(Windows.UI.Xaml.FocusState.Unfocused);
-            
+
+            if (events.Count == 0)
+            {
+                urgentCount.Text = "0";
+                lowCount.Text = "0";
+                normalCount.Text = "0";
+                noPCount.Text = "0";
+                totalCount.Text = "0";
+            }    
+
 #if OFFLINE_SYNC_ENABLED
             await App.MobileService.SyncContext.PushAsync(); // offline sync
 #endif
@@ -229,14 +237,14 @@ namespace CollegeOrganiser.View
         {
             CheckBox cb = (CheckBox)sender;
             Event events = cb.DataContext as Event;
-            displayTaskList();
+            displayEventList();
             await UpdateCheckedEventDetails(events);  
         }
 
 
         private async void Sync_Click(object sender, RoutedEventArgs e)
         {
-            displayTaskList();
+            displayEventList();
             await RefreshEventDetails();
 
 #if OFFLINE_SYNC_ENABLED
