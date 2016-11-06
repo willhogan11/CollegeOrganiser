@@ -91,13 +91,35 @@ namespace CollegeOrganiser.View
         public void displayTaskList()
         {
             string debugValues = "";
-            int counter = 0;
+            int urgCount = 0, normCount = 0, lowCnt = 0, noCount = 0, totalCnt = 0;
 
             foreach (var evnt in events)
             {
-                counter++;
-                debugValues = string.Format("No: " + counter + " Module: " + evnt.Module + " EventDetail: " + evnt.EventDetail + " % of Module: " + evnt.PercentOfModule + " Priority Level: " + evnt.PriorityState + " Deadline:" + evnt.Deadline);
+                if (evnt.PriorityState.Equals("URGENT"))
+                    urgCount++;
+                if (evnt.PriorityState.Equals("NORMAL"))
+                    normCount++;
+                if (evnt.PriorityState.Equals("LOW"))
+                    lowCnt++;
+                if (evnt.PriorityState.Equals("None"))
+                    noCount++;
+                totalCnt++;
+
+                urgentCount.Text = urgCount.ToString();
+                normalCount.Text = normCount.ToString();
+                lowCount.Text = lowCnt.ToString();
+                noPCount.Text = noCount.ToString();
+                totalCount.Text = totalCnt.ToString();
+
+#if DEBUG
+                debugValues = string.Format("No: " + totalCnt + " Module: " + evnt.Module + " EventDetail: " + evnt.EventDetail + " % of Module: " + evnt.PercentOfModule + " Priority Level: " + evnt.PriorityState + " Deadline:" + evnt.Deadline);
                 Debug.WriteLine(debugValues);
+                Debug.WriteLine("Urgent Count: " + urgCount);
+                Debug.WriteLine("Normal Count: " + normCount);
+                Debug.WriteLine("Low Count: " + lowCount);
+                Debug.WriteLine("No Priority Count: " + noCount);
+                Debug.WriteLine("Total Count: " + totalCnt);
+#endif
             }
         }
 
@@ -174,11 +196,12 @@ namespace CollegeOrganiser.View
                              + monthComboBox.SelectedItem.ToString() + " " 
                              + yearComboBox.SelectedItem.ToString()
                 };
-
                 moduleTitleTextBox.Text = "";
                 eventNameTextBox.Text = "";
                 percentOfModuleComboBox.SelectedItem = 0;
+
                 await InsertEvent(eventDetails);
+                displayTaskList();
             }
             catch (Exception)
             { }
@@ -189,9 +212,12 @@ namespace CollegeOrganiser.View
         {
             // This code takes a freshly completed TodoItem and updates the database.
             // After the MobileService client responds, the item is removed from the list.
+            
             await eventTable.UpdateAsync(eventDetails);
             events.Remove(eventDetails);
+            displayTaskList();
             EventDetails.Focus(Windows.UI.Xaml.FocusState.Unfocused);
+            
 
 #if OFFLINE_SYNC_ENABLED
             await App.MobileService.SyncContext.PushAsync(); // offline sync
@@ -203,7 +229,20 @@ namespace CollegeOrganiser.View
         {
             CheckBox cb = (CheckBox)sender;
             Event events = cb.DataContext as Event;
+            displayTaskList();
             await UpdateCheckedEventDetails(events);
+            
+        }
+
+
+        private async void Sync_Click(object sender, RoutedEventArgs e)
+        {
+            displayTaskList();
+            await RefreshEventDetails();
+
+#if OFFLINE_SYNC_ENABLED
+            await SyncAsync(); // offline sync
+#endif
         }
     }
 }
