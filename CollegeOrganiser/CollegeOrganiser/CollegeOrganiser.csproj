@@ -95,6 +95,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataModel\EnumData.cs" />
     <Compile Include="DataModel\Event.cs" />
     <Compile Include="View\EventsPage.xaml.cs">
       <DependentUpon>EventsPage.xaml</DependentUpon>

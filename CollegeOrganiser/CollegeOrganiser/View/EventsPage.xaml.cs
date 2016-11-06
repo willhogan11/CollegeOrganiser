@@ -6,9 +6,7 @@ using Windows.UI.Xaml.Controls;
 using System.Diagnostics;
 using CollegeOrganiser.DataModel;
 using Windows.UI.Popups;
-using Windows.UI.Xaml.Navigation;
-using Windows.UI.Xaml.Documents;
-using System.Collections.Generic;
+using static CollegeOrganiser.DataModel.EnumData;
 
 
 // #define OFFLINE_SYNC_ENABLED
@@ -113,27 +111,8 @@ namespace CollegeOrganiser.View
             }
         }
 
-
-        public enum PriorityEnum
-        {  
-            URGENT, NORMAL, LOW, None
-        }
-
-        public enum DayEnum
-        {
-            Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-        }
-
-        public enum MonthEnum
-        {
-            January, February, March, April, May, June, July, August, September, October, November, December
-        }
-
-
-        // On page load, loads percentage completed values into the percentageCompleted comboBox
-        // and Adds each enum priority instance into the Priority comboBox
-        // and also Refreshes the Event Details Listview with Database values that currently exist on Azure
-        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        // A method that loads all the data associated with comboBoxes
+        public void loadData()
         {
             foreach (DayEnum day in Enum.GetValues(typeof(DayEnum)))
             {
@@ -144,14 +123,6 @@ namespace CollegeOrganiser.View
             {
                 monthComboBox.Items.Add(month);
             }
-
-            yearComboBox.Items.Add(2016);
-            yearComboBox.Items.Add(2017);
-            yearComboBox.Items.Add(2018);
-            yearComboBox.Items.Add(2019);
-            yearComboBox.Items.Add(2020);
-            yearComboBox.Items.Add(2021);
-            yearComboBox.Items.Add(2022);
 
             foreach (PriorityEnum p in Enum.GetValues(typeof(PriorityEnum)))
             {
@@ -167,6 +138,23 @@ namespace CollegeOrganiser.View
             {
                 percentOfModuleComboBox.Items.Add(i);
             }
+
+            yearComboBox.Items.Add(2016);
+            yearComboBox.Items.Add(2017);
+            yearComboBox.Items.Add(2018);
+            yearComboBox.Items.Add(2019);
+            yearComboBox.Items.Add(2020);
+            yearComboBox.Items.Add(2021);
+            yearComboBox.Items.Add(2022);
+        }
+
+
+        // On page load, loads percentage completed values into the percentageCompleted comboBox
+        // and Adds each enum priority instance into the Priority comboBox
+        // and also Refreshes the Event Details Listview with Database values that currently exist on Azure
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            loadData();
             await RefreshEventDetails();
         }
 
