@@ -157,15 +157,11 @@ namespace CollegeOrganiser.View
                 percentOfModuleComboBox.Items.Add(i);
             }
 
-            yearComboBox.Items.Add(2016);
-            yearComboBox.Items.Add(2017);
-            yearComboBox.Items.Add(2018);
-            yearComboBox.Items.Add(2019);
-            yearComboBox.Items.Add(2020);
-            yearComboBox.Items.Add(2021);
-            yearComboBox.Items.Add(2022);
+            for (int i = 0; i <= 50; i++)
+            {
+                yearComboBox.Items.Add(2010 + i);
+            }
         }
-
 
         // On page load, loads percentage completed values into the percentageCompleted comboBox
         // and Adds each enum priority instance into the Priority comboBox
@@ -173,7 +169,6 @@ namespace CollegeOrganiser.View
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             loadData();
-            
 
 #if OFFLINE_SYNC_ENABLED
             await InitLocalStoreAsync(); // offline sync
@@ -215,6 +210,7 @@ namespace CollegeOrganiser.View
             // After the MobileService client responds, the item is removed from the list.
             await eventTable.UpdateAsync(eventDetails);
             events.Remove(eventDetails);
+                        
             displayEventList();
             EventDetails.Focus(Windows.UI.Xaml.FocusState.Unfocused);
 
@@ -225,6 +221,9 @@ namespace CollegeOrganiser.View
                 normalCount.Text = "0";
                 noPCount.Text = "0";
                 totalCount.Text = "0";
+
+                MessageDialog message = new MessageDialog("All Events Completed!");
+                await message.ShowAsync();
             }    
 
 #if OFFLINE_SYNC_ENABLED
@@ -238,7 +237,7 @@ namespace CollegeOrganiser.View
             CheckBox cb = (CheckBox)sender;
             Event events = cb.DataContext as Event;
             displayEventList();
-            await UpdateCheckedEventDetails(events);  
+            await UpdateCheckedEventDetails(events);
         }
 
 

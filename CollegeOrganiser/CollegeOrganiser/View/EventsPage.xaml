@@ -9,9 +9,7 @@
     Loaded="Page_Loaded">
 
     <Grid x:Name="LayoutRoot" Background="{StaticResource bookBrush}">
-        
-   
-        
+           
         <StackPanel x:Name="eventHeaderStackPanel" Margin="0 20 0 0">
             <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock HorizontalAlignment="Center" Text="Module Events"
@@ -45,7 +43,7 @@
                 <TextBlock Margin="0 10 0 5" Text="Deadline"/>
                 <StackPanel Orientation="Horizontal">
                     <ComboBox PlaceholderText="Day" x:Name="dayComboBox" />
-                    <ComboBox PlaceholderText="Day Num" x:Name="dayNumComboBox" />
+                    <ComboBox PlaceholderText="Date" x:Name="dayNumComboBox" />
                     <ComboBox PlaceholderText="Month" x:Name="monthComboBox" />
                     <ComboBox PlaceholderText="Year" x:Name="yearComboBox" />
                 </StackPanel>
