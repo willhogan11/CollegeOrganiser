@@ -9,22 +9,31 @@
     Loaded="Page_Loaded">
 
     <Grid x:Name="LayoutRoot" Background="{StaticResource bookBrush}">
-        <StackPanel x:Name="eventHeaderStackPanel">
-            <TextBlock HorizontalAlignment="Center"
-                       Margin="0 20 0 0"
-                       Text="Module Events"
-                       FontFamily="Century-Gothic"
-                       FontSize="28"
-                       FontWeight="Bold"
-                       Foreground="Brown" />
+        
+   
+        
+        <StackPanel x:Name="eventHeaderStackPanel" Margin="0 20 0 0">
+            <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
+                <TextBlock HorizontalAlignment="Center" Text="Module Events"
+                           FontFamily="Century-Gothic" FontSize="28" FontWeight="Bold" Foreground="Brown" />
+                <TextBlock HorizontalAlignment="Center" Margin="6 6 0 0" Text="Module Events" Opacity="0.1"
+                           FontFamily="Century-Gothic" FontSize="28" FontWeight="Bold" Foreground="Brown" />
+                <TextBlock HorizontalAlignment="Center" Margin="5 5 0 0" Text="Module Events" Opacity="0.1"
+                           FontFamily="Century-Gothic" FontSize="28" FontWeight="Bold" Foreground="Brown" />
+                <TextBlock HorizontalAlignment="Center" Margin="4 4 0 0" Text="Module Events" Opacity="0.1"
+                           FontFamily="Century-Gothic" FontSize="28" FontWeight="Bold" Foreground="Brown" />
+                <TextBlock HorizontalAlignment="Center" Margin="3 3 0 0" Text="Module Events" Opacity="0.1"
+                           FontFamily="Century-Gothic" FontSize="28" FontWeight="Bold" Foreground="Brown" />
+            </Grid>
+
         </StackPanel>
 
         <StackPanel Margin="10 60 10 0" 
                     Width="Auto" 
                     Height="Auto">
-            <StackPanel Height="260" BorderThickness="2" BorderBrush="DarkGray" Width="Auto" 
+            <StackPanel Height="280 " BorderThickness="5" CornerRadius="20" BorderBrush="DarkGray" Width="Auto" 
                         Background="LightGray" 
-                        Padding="10">
+                        Padding="8">
                 <TextBox PlaceholderText="Module Title"
                          x:Name="moduleTitleTextBox" 
                          KeyDown="moduleTitleTextBox_KeyDown"/>
@@ -55,29 +64,58 @@
                               PlaceholderText="Priority Level" 
                               KeyDown="moduleTitleTextBox_KeyDown" />
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="urgentEvent" Padding="0 0 10 0" FontFamily="Century Gothic" Margin="0 10 0 0"
-                               Foreground="Red" FontWeight="Bold" Text="Urgent:" />
-                    <TextBlock x:Name="urgentCount" Padding="0 0 10 0" FontFamily="Century Gothic" Margin="0 10 0 0"
-                               Foreground="Red" FontWeight="Bold" />
-                    <TextBlock x:Name="normalEvent" Padding="0 0 10 0" FontFamily="Century Gothic" Margin="0 10 0 0"
-                               Foreground="Orange" FontWeight="Bold" Text="Normal: " />
-                    <TextBlock x:Name="normalCount"  FontFamily="Century Gothic" Margin="0 10 0 0"
-                               Foreground="Orange" FontWeight="Bold" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock x:Name="lowEvent" Padding="0 0 10 0" FontFamily="Century Gothic" Margin="0 10 0 0"
-                               Foreground="Green" FontWeight="Bold" Text="Low:" />
-                    <TextBlock x:Name="lowCount" Padding="0 0 10 0" FontFamily="Century Gothic" Margin="0 10 0 0"
-                               Foreground="Green" FontWeight="Bold" />
-                    <TextBlock x:Name="noPriority" Padding="0 0 10 0" FontFamily="Century Gothic" Margin="0 10 0 0"
-                               Foreground="Blue" FontWeight="Bold" Text="No Priority:" />
-                    <TextBlock x:Name="noPCount" Padding="0 0 10 0" FontFamily="Century Gothic" Margin="0 10 0 0"
-                               Foreground="Blue" FontWeight="Bold" />
-                    <TextBlock x:Name="totalEvents" Padding="0 0 10 0" FontFamily="Century Gothic" Margin="0 10 0 0"
-                               Foreground="Black" FontStyle="Italic" FontWeight="ExtraBold" Text="Total:" />
-                    <TextBlock x:Name="totalCount" FontFamily="Century Gothic" Margin="0 10 0 0"
-                               Foreground="Black" FontStyle="Italic" FontWeight="ExtraBold" />
+                <StackPanel Orientation="Horizontal" Background="White" BorderBrush="Black" 
+                            BorderThickness="2" Padding="0 8 0 0" Margin="0 10 0 0">
+                    <StackPanel Orientation="Vertical" Padding="0 0 20 0">
+                        <TextBlock x:Name="urgentEvent" Padding="10 0 10 0" FontFamily="Century Gothic" 
+                                   Foreground="Red" FontWeight="Bold" Text="Urgent:" RenderTransformOrigin="0.5,0.5" >
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform Rotation="-14.000"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock x:Name="urgentCount" Padding="0 0 10 0" FontFamily="Century Gothic" 
+                                   Foreground="Red" FontWeight="Bold" TextAlignment="Right" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Padding="0 0 20 0">
+                        <TextBlock x:Name="normalEvent" Padding="0 0 10 0" FontFamily="Century Gothic"
+                                   Foreground="Orange" FontWeight="Bold" Text="Normal: " RenderTransformOrigin="0.5,0.5" >
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform Rotation="-14.000"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock x:Name="normalCount" Padding="0 0 10 0" FontFamily="Century Gothic" 
+                                   Foreground="Orange" FontWeight="Bold" TextAlignment="Right" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Padding="0 0 20 0">
+                        <TextBlock x:Name="lowEvent" Padding="0 0 10 0" FontFamily="Century Gothic" 
+                                   Foreground="Green" FontWeight="Bold" Text="Low:" RenderTransformOrigin="0.5,0.5" >
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform Rotation="-14.000"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock x:Name="lowCount" Padding="0 0 10 0" FontFamily="Century Gothic" 
+                                   Foreground="Green" FontWeight="Bold" TextAlignment="Right" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Padding="0 0 20 0">
+                        <TextBlock x:Name="noPriority" Padding="0 0 10 0" FontFamily="Century Gothic" 
+                                   Foreground="Blue" FontWeight="Bold" Text="No Priority:" RenderTransformOrigin="0.5,0.5" >
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform Rotation="-14.000"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock x:Name="noPCount" Padding="0 0 10 0" FontFamily="Century Gothic" 
+                                   Foreground="Blue" FontWeight="Bold" TextAlignment="Right" />
+                    </StackPanel>
+                    <StackPanel Padding="2" Orientation="Vertical" BorderBrush="Bisque" BorderThickness="3" Background="LightBlue">
+                        <TextBlock x:Name="totalEvents" FontFamily="Century Gothic" 
+                                   Foreground="Black" FontStyle="Italic" FontWeight="ExtraBold" Text="Total:" RenderTransformOrigin="0.5,0.5" >
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform Rotation="-14.000"/>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock x:Name="totalCount" FontFamily="Century Gothic"
+                                   Foreground="Black" FontStyle="Italic" FontWeight="ExtraBold" TextAlignment="Right" />
+                    </StackPanel>
                 </StackPanel>
             </StackPanel>
 
@@ -128,7 +166,7 @@
                                             <TextBlock FontFamily="Century Gothic" Name="deadlineText" Text="{Binding Deadline}" MaxWidth="550" TextWrapping="WrapWholeWords"/>
                                         </StackPanel>
                                         <TextBlock></TextBlock>
-                                        <TextBlock Name="CreateLineBreak">_________________________________________________________________________________________________</TextBlock>
+                                        <TextBlock Name="CreateLineBreak">_______________________________________________________________________________________________________________________________</TextBlock>
                                     </StackPanel>
                                 </CheckBox>
                             </DataTemplate>
@@ -144,8 +182,6 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="Auto">
                 <AppBarButton Label="Add" Name="Add" x:Uid="uidAdd" Icon="Add"  Click="Add_Click" />
                 <AppBarButton Label="Sync" x:Name="Sync" x:Uid="uidShow" Icon="Refresh" Click="Sync_Click" />
-                <!--<AppBarButton x:Name="Delete" x:Uid="uidDelete" IsEnabled="False" Icon="Remove" />
-                <AppBarButton x:Name="DeleteAll" x:Uid="uidDeleteAll" IsEnabled="False" Icon="Delete" />-->
             </StackPanel>
         </AppBar>
     </Page.BottomAppBar>
