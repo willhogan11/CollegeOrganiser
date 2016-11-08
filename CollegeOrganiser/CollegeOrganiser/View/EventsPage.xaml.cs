@@ -181,7 +181,8 @@ namespace CollegeOrganiser.View
         {
             try
             {
-                if (!IsPresent(moduleTitleTextBox) || !IsPresent(eventNameTextBox) || !ComboValuePresent(dayComboBox) )
+                if (!IsPresent(moduleTitleTextBox) || !IsPresent(eventNameTextBox) || !ComboValuePresent(dayComboBox) || !ComboValuePresent(priorityLevelComboBox) ||
+                    !ComboValuePresent(dayNumComboBox) || !ComboValuePresent(monthComboBox) || !ComboValuePresent(yearComboBox) )
                 {
                     MessageDialog message = new MessageDialog("Required Fields missing!");
                     await message.ShowAsync();
