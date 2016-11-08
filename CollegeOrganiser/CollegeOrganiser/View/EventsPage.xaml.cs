@@ -181,23 +181,47 @@ namespace CollegeOrganiser.View
         {
             try
             {
-                var eventDetails = new Event
+                if (!IsPresent(moduleTitleTextBox))
                 {
-                    Module = moduleTitleTextBox.Text,
-                    EventDetail = eventNameTextBox.Text,
-                    PercentOfModule = Convert.ToInt32(percentOfModuleComboBox.SelectedItem),
-                    PriorityState = priorityLevelComboBox.SelectedItem.ToString(), 
-                    Deadline = dayComboBox.SelectedItem.ToString() + " " 
-                             + dayNumComboBox.SelectedItem + " " 
-                             + monthComboBox.SelectedItem.ToString() + " " 
-                             + yearComboBox.SelectedItem.ToString()
-                };
-                moduleTitleTextBox.Text = "";
-                eventNameTextBox.Text = "";
-                percentOfModuleComboBox.SelectedItem = 0;
+                    MessageDialog message = new MessageDialog("Required Fields missing!");
+                    await message.ShowAsync();
+                    requiredField1.Visibility = Visibility.Visible;
+                }
+                else if (!IsPresent(eventNameTextBox))
+                {
+                    MessageDialog message = new MessageDialog("Required Fields missing!");
+                    await message.ShowAsync();
+                    requiredField2.Visibility = Visibility.Visible;
+                }
+                else if (!IsPresent(moduleTitleTextBox) && !IsPresent(eventNameTextBox) )
+                {
+                    MessageDialog message = new MessageDialog("Required Fields missing!");
+                    await message.ShowAsync();
+                    requiredField1.Visibility = Visibility.Visible;
+                    requiredField2.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    var eventDetails = new Event
+                    {
+                        Module = moduleTitleTextBox.Text,
+                        EventDetail = eventNameTextBox.Text,
+                        PercentOfModule = Convert.ToInt32(percentOfModuleComboBox.SelectedItem),
+                        PriorityState = priorityLevelComboBox.SelectedItem.ToString(),
+                        Deadline = dayComboBox.SelectedItem.ToString() + " "
+                                 + dayNumComboBox.SelectedItem + " "
+                                 + monthComboBox.SelectedItem.ToString() + " "
+                                 + yearComboBox.SelectedItem.ToString()
+                    };
+                    moduleTitleTextBox.Text = "";
+                    eventNameTextBox.Text = "";
+                    percentOfModuleComboBox.SelectedItem = 0;
 
-                await InsertEvent(eventDetails);
-                displayEventList();
+                    await InsertEvent(eventDetails);
+                    displayEventList();
+                    requiredField1.Visibility = Visibility.Collapsed;
+                    requiredField2.Visibility = Visibility.Collapsed;
+                }
             }
             catch (Exception)
             { }
@@ -250,6 +274,18 @@ namespace CollegeOrganiser.View
             await SyncAsync(); // offline sync
 #endif
         }
+
+
+
+        // Checks to Ensure that all fields have data in them, returns false if not
+        private bool IsPresent(TextBox textBox)
+        {
+            if (textBox.Text == "")
+                return false;
+            else
+                return true;
+        }
+
 
 
         #region Offline sync
