@@ -22,7 +22,7 @@
                            FontFamily="Century-Gothic" FontSize="28" FontWeight="Bold" Foreground="Brown" />
                 <TextBlock HorizontalAlignment="Center" Margin="3 3 0 0" Text="Module Events" Opacity="0.1"
                            FontFamily="Century-Gothic" FontSize="28" FontWeight="Bold" Foreground="Brown" />
-            </Grid>
+            </Grid>     
 
         </StackPanel>
 
@@ -32,18 +32,16 @@
             <StackPanel Height="280 " BorderThickness="5" CornerRadius="20" BorderBrush="DarkGray" Width="Auto" 
                         Background="LightGray" 
                         Padding="8">
+                <TextBlock HorizontalAlignment="Right" Margin="2 0 0 0" x:Name="requiredField" FontSize="12"
+                           Foreground="Red" Text="Some Fields missing values" Visibility="Collapsed" Width="Auto" Height="Auto" />
                 <TextBox PlaceholderText="Module Title"
                          x:Name="moduleTitleTextBox" 
                          KeyDown="moduleTitleTextBox_KeyDown"/>
-                <TextBlock HorizontalAlignment="Left" Margin="2 0 0 0" x:Name="requiredField1" 
-                           Foreground="Red" Text="*" Visibility="Collapsed" Width="10" Height="10" />
 
                 <TextBox Margin="0 10 0 0" 
                          x:Name="eventNameTextBox"
                          PlaceholderText="Event Detail" 
                          KeyDown="moduleTitleTextBox_KeyDown" />
-                <TextBlock HorizontalAlignment="Left" Margin="2 0 0 0" x:Name="requiredField2" 
-                           Foreground="Red" Text="*" Visibility="Collapsed" Width="10" Height="10" />
 
                 <TextBlock Margin="0 10 0 5" Text="Deadline"/>
                 <StackPanel Orientation="Horizontal">

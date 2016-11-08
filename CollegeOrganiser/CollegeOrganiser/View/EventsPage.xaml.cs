@@ -181,24 +181,11 @@ namespace CollegeOrganiser.View
         {
             try
             {
-                if (!IsPresent(moduleTitleTextBox))
+                if (!IsPresent(moduleTitleTextBox) || !IsPresent(eventNameTextBox) || !ComboValuePresent(dayComboBox) )
                 {
                     MessageDialog message = new MessageDialog("Required Fields missing!");
                     await message.ShowAsync();
-                    requiredField1.Visibility = Visibility.Visible;
-                }
-                else if (!IsPresent(eventNameTextBox))
-                {
-                    MessageDialog message = new MessageDialog("Required Fields missing!");
-                    await message.ShowAsync();
-                    requiredField2.Visibility = Visibility.Visible;
-                }
-                else if (!IsPresent(moduleTitleTextBox) && !IsPresent(eventNameTextBox) )
-                {
-                    MessageDialog message = new MessageDialog("Required Fields missing!");
-                    await message.ShowAsync();
-                    requiredField1.Visibility = Visibility.Visible;
-                    requiredField2.Visibility = Visibility.Visible;
+                    requiredField.Visibility = Visibility.Visible;
                 }
                 else
                 {
@@ -219,8 +206,7 @@ namespace CollegeOrganiser.View
 
                     await InsertEvent(eventDetails);
                     displayEventList();
-                    requiredField1.Visibility = Visibility.Collapsed;
-                    requiredField2.Visibility = Visibility.Collapsed;
+                    requiredField.Visibility = Visibility.Collapsed;
                 }
             }
             catch (Exception)
@@ -277,13 +263,24 @@ namespace CollegeOrganiser.View
 
 
 
-        // Checks to Ensure that all fields have data in them, returns false if not
+        // Checks to Ensure that all TextBox fields have data in them, returns false if not
+        // Using the shortend Ternary operators conditional statement
+        // Ref: https://msdn.microsoft.com/en-us/library/ty67wk28.aspx
+
         private bool IsPresent(TextBox textBox)
         {
-            if (textBox.Text == "")
-                return false;
-            else
-                return true;
+            return (textBox.Text == "") ? false : true;
+        }
+
+
+
+        // Checks to Ensure that all ComboBoxes have data selected, returns false if not
+        // Using the shortend Ternary operators conditional statement
+        // Ref: https://msdn.microsoft.com/en-us/library/ty67wk28.aspx
+
+        private bool ComboValuePresent(ComboBox comboBox)
+        {
+            return (comboBox.SelectedItem == null) ? false : true;
         }
 
 
