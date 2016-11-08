@@ -3,6 +3,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using CollegeOrganiser.View;
+using Windows.UI.Xaml;
 
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
@@ -29,6 +30,13 @@ namespace CollegeOrganiser
         private void Page_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Frame.Navigate(typeof(MenuPage));
+        }
+
+        // Start the animation when the object loads
+        // Adapted from[ref] https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.media.animation.doubleanimation.aspx
+        private void Start_Animation(object sender, RoutedEventArgs e)
+        {
+            myStoryboard.Begin();
         }
     }
 }
