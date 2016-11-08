@@ -8,49 +8,48 @@
     Tapped="Page_Tapped"
     mc:Ignorable="d">
 
-    
+
     <Grid x:Name="LayoutRoot" Background="{StaticResource bookBrush}">
-        <TextBlock HorizontalAlignment="Center"
+
+        <StackPanel Margin="0 100 0 0">
+            <TextBlock HorizontalAlignment="Center"
                    FontFamily="Century-Gothic"
-                   Margin="0 30 60 0"
-                   FontSize="32" FontWeight="ExtraBold">College Organiser
-        </TextBlock>
-        <StackPanel x:Name="sptextBlock" 
-                    VerticalAlignment="Bottom"
-                    Margin="0 0 0 50"
-                    HorizontalAlignment="Center">
-            
+                   Margin="10 30 60 0"
+                   FontSize="32" 
+                   FontWeight="ExtraBold" 
+                   Text="College Organiser" />
+
         </StackPanel>
 
         <!--  Adapted from [ref] https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.media.animation.doubleanimation.aspx -->
-        <StackPanel>
-            <StackPanel.Resources>
-                <Storyboard x:Name="myStoryboard">
-                    <DoubleAnimation
-          Storyboard.TargetName="MyAnimatedRectangle"
-          Storyboard.TargetProperty="Opacity"
-          From="1.0" To="0.0" Duration="0:0:1"
-          AutoReverse="True" RepeatBehavior="Forever" />
-                </Storyboard>
-            </StackPanel.Resources>
-            <StackPanel Width="auto" Height="auto" Margin="180 570 0 0">
-                <Rectangle Loaded="Start_Animation" x:Name="MyAnimatedRectangle"
-                           Width="125" Height="25" Fill="LightBlue" Margin="28,0,27,0" />
+
+        <StackPanel Margin="120 475 0 0">
+            <StackPanel>
+                <StackPanel.Resources>
+                    <Storyboard x:Name="myStoryboard">
+                        <DoubleAnimation Storyboard.TargetName="MyAnimatedRectangle"
+                                        Storyboard.TargetProperty="Opacity"
+                                        From="1.0" To="0.0" Duration="0:0:1"
+                                        AutoReverse="True" RepeatBehavior="Forever" />
+                    </Storyboard>
+                </StackPanel.Resources>
+                <StackPanel Margin="0 0 0 -25">
+                    <Rectangle Loaded="Start_Animation" x:Name="MyAnimatedRectangle"
+                            Width="125" Height="30" Fill="LightCoral" />
+                </StackPanel>
             </StackPanel>
+            <TextBlock x:Name="titleTextBlock"    
+                        FontFamily="Century-Gothic"
+                        HorizontalAlignment="Center" VerticalAlignment="Center"
+                        TextAlignment="Center"
+                        FontSize="16"
+                        FontWeight="Bold"
+                        Height="25"
+                        Width="Auto" Margin="71,0,69,0">
+                <Run Text="Tap To Begin"/>
+            </TextBlock>
+            <!-- End Animation -->
         </StackPanel>
-        <!-- End Animation -->
-        
-        <TextBlock x:Name="titleTextBlock"    
-                    Margin="180 510 0 0"
-                    x:Uid="uidTitleTextBlock"
-                    HorizontalAlignment="Center"
-                    FontFamily="Century-Gothic"
-                    TextAlignment="Center"
-                    FontSize="20"
-                    FontWeight="Bold"
-                    Height="30"
-                    Width="Auto">Tap To Begin
-        </TextBlock>
 
     </Grid>
 </Page>
