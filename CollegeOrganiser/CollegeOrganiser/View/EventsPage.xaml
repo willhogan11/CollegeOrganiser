@@ -9,7 +9,9 @@
     Loaded="Page_Loaded">
 
     <Grid x:Name="LayoutRoot" Background="{StaticResource bookBrush}">
-           
+        
+        <!-- As no Shadow effects exist in the newer versions of XAML, this work around mimics the effect by stacking
+             multiple copies of the same text on top of each other. Each copy has varying margin properties -->
         <StackPanel x:Name="eventHeaderStackPanel" Margin="0 20 0 0">
             <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
                 <TextBlock HorizontalAlignment="Center" Text="Module Events"
@@ -23,12 +25,14 @@
                 <TextBlock HorizontalAlignment="Center" Margin="3 3 0 0" Text="Module Events" Opacity="0.1"
                            FontFamily="Century-Gothic" FontSize="28" FontWeight="Bold" Foreground="Brown" />
             </Grid>     
-
         </StackPanel>
+        <!-- End header -->
 
         <StackPanel Margin="10 60 10 0" 
                     Width="Auto" 
                     Height="Auto">
+            
+            <!-- This container holds all the Textfileds and comboBoxes associated with each event -->
             <StackPanel Height="280 " BorderThickness="5" CornerRadius="20" BorderBrush="DarkGray" Width="Auto" 
                         Background="LightGray" 
                         Padding="8">
@@ -120,10 +124,11 @@
                 </StackPanel>
             </StackPanel>
 
+            <!-- This Grid view holds all the retrieved events that were either stored
+                 remotely or locally and displays each event object in a scrollable ListView -->
             <Grid x:Name="ItemsGrid" Grid.Row="2" Grid.Column="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="167*"/>
-                    <ColumnDefinition Width="173*"/>
+                    <ColumnDefinition Width="300*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -175,9 +180,10 @@
                     </ListView>
                 </ScrollViewer>
             </Grid>
-
         </StackPanel>
     </Grid>
+    
+    <!-- This is the Menu bar situated at the bottom of the EventsPage -->
     <Page.BottomAppBar>
         <AppBar IsOpen="True" IsSticky="True">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Width="Auto">
@@ -186,4 +192,6 @@
             </StackPanel>
         </AppBar>
     </Page.BottomAppBar>
+    <!-- End AppBar -->
+    
 </Page>

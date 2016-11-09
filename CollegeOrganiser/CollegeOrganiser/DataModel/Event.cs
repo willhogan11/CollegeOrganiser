@@ -2,6 +2,8 @@
 
 namespace CollegeOrganiser.DataModel
 {
+    /* This class maps getter and setters values from what's been entered in XAML (EventPage)...
+     * To values columns in the database stored in both Azure and locally using Sqlite */
     public class Event
     {
         public string Id { get; set; }

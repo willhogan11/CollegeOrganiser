@@ -26,13 +26,13 @@ namespace CollegeOrganiser
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
         }
 
-        // Navigates to the Menu Page when Tapped
+        // Navigates to the Menu Page when anywhere on this page is tapped
         private void Page_Tapped(object sender, TappedRoutedEventArgs e)
         {
             Frame.Navigate(typeof(MenuPage));
         }
 
-        // Start the animation when the object loads
+        // Start an animation that fades in and out on the "Tap to Begin" textBlock when the object loads
         // Adapted from[ref] https://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.xaml.media.animation.doubleanimation.aspx
         private void Start_Animation(object sender, RoutedEventArgs e)
         {
