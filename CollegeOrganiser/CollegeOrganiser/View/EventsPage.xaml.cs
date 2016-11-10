@@ -1,5 +1,5 @@
 ﻿
-// #define OFFLINE_SYNC_ENABLED
+#define OFFLINE_SYNC_ENABLED
 
 using Microsoft.WindowsAzure.MobileServices;
 using System;
@@ -338,7 +338,7 @@ namespace CollegeOrganiser.View
         private async Task SyncAsync()
         {
             await App.MobileService.SyncContext.PushAsync();
-            await eventTable.PullAsync("eventDetails", eventTable.CreateQuery());
+            // await eventTable.PullAsync("eventDetails", eventTable.CreateQuery());
         }
 #endif
         #endregion
