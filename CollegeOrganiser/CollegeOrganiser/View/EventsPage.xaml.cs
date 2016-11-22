@@ -319,7 +319,7 @@ namespace CollegeOrganiser.View
             return (comboBox.SelectedItem == null) ? false : true;
         }
 
-
+        // Having an issue installing sqlite from the nuget package manager, working the issue.
         // Stored the data offline using SQLite
         #region Offline sync
 #if OFFLINE_SYNC_ENABLED
