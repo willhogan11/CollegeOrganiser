@@ -16,7 +16,7 @@
                         Background="LightBlue"
                         FontSize="25"
                         BorderBrush="Black"
-                        Content="Events"
+                        x:Uid="uidEventsButton"
                         Tapped="EventsButton_Tapped"/>
             </StackPanel>
         </Grid>

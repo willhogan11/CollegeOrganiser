@@ -14,15 +14,15 @@
              multiple copies of the same text on top of each other. Each copy has varying margin properties -->
         <StackPanel x:Name="eventHeaderStackPanel" Margin="0 20 0 0">
             <Grid VerticalAlignment="Center" HorizontalAlignment="Center">
-                <TextBlock HorizontalAlignment="Center" Text="Module Events"
+                <TextBlock HorizontalAlignment="Center" x:Uid="moduleHead1"
                            FontFamily="Century-Gothic" FontSize="28" FontWeight="Bold" Foreground="Brown" />
-                <TextBlock HorizontalAlignment="Center" Margin="6 6 0 0" Text="Module Events" Opacity="0.1"
+                <TextBlock HorizontalAlignment="Center" Margin="6 6 0 0" Opacity="0.1" x:Uid="moduleHead2"
                            FontFamily="Century-Gothic" FontSize="28" FontWeight="Bold" Foreground="Brown" />
-                <TextBlock HorizontalAlignment="Center" Margin="5 5 0 0" Text="Module Events" Opacity="0.1"
+                <TextBlock HorizontalAlignment="Center" Margin="5 5 0 0" Opacity="0.1" x:Uid="moduleHead3"
                            FontFamily="Century-Gothic" FontSize="28" FontWeight="Bold" Foreground="Brown" />
-                <TextBlock HorizontalAlignment="Center" Margin="4 4 0 0" Text="Module Events" Opacity="0.1"
+                <TextBlock HorizontalAlignment="Center" Margin="4 4 0 0" Opacity="0.1" x:Uid="moduleHead4"
                            FontFamily="Century-Gothic" FontSize="28" FontWeight="Bold" Foreground="Brown" />
-                <TextBlock HorizontalAlignment="Center" Margin="3 3 0 0" Text="Module Events" Opacity="0.1"
+                <TextBlock HorizontalAlignment="Center" Margin="3 3 0 0" Opacity="0.1" x:Uid="moduleHead5"
                            FontFamily="Century-Gothic" FontSize="28" FontWeight="Bold" Foreground="Brown" />
             </Grid>     
         </StackPanel>
@@ -34,46 +34,44 @@
             
             <!-- This container holds all the Textfileds and comboBoxes associated with each event -->
             <StackPanel Height="280 " BorderThickness="5" CornerRadius="20" BorderBrush="DarkGray" Width="Auto" 
-                        Background="LightGray" 
-                        Padding="8">
+                        Background="LightGray" Padding="8">
                 <TextBlock HorizontalAlignment="Right" Margin="2 0 0 0" x:Name="requiredField" FontSize="12"
-                           Foreground="Red" Text="Some Fields missing values" Visibility="Collapsed" Width="Auto" Height="Auto" />
-                <TextBox PlaceholderText="Module Title"
+                           Foreground="Red" x:Uid="uidReqFields" Visibility="Collapsed" Width="Auto" Height="Auto" />
+                <TextBox x:Uid="uidModuleTitle"
                          x:Name="moduleTitleTextBox" 
                          KeyDown="moduleTitleTextBox_KeyDown"/>
-
                 <TextBox Margin="0 10 0 0" 
                          x:Name="eventNameTextBox"
-                         PlaceholderText="Event Detail" 
+                         x:Uid="uidEventDetail"
                          KeyDown="moduleTitleTextBox_KeyDown" />
 
-                <TextBlock Margin="0 10 0 5" Text="Deadline"/>
+                <TextBlock Margin="0 10 0 5" x:Uid="uidDeadline"/>
                 <StackPanel Orientation="Horizontal">
-                    <ComboBox PlaceholderText="Day" x:Name="dayComboBox" />
-                    <ComboBox PlaceholderText="Date" x:Name="dayNumComboBox" />
-                    <ComboBox PlaceholderText="Month" x:Name="monthComboBox" />
-                    <ComboBox PlaceholderText="Year" x:Name="yearComboBox" />
+                    <ComboBox x:Name="dayComboBox" x:Uid="uidDay" />
+                    <ComboBox x:Name="dayNumComboBox" x:Uid="uidNum" />
+                    <ComboBox x:Name="monthComboBox" x:Uid="uidMonth" />
+                    <ComboBox x:Name="yearComboBox" x:Uid="uidYear" />
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" 
                             HorizontalAlignment="Left">
                     <ComboBox Margin="0 10 0 0" 
                               x:Name="percentOfModuleComboBox" 
-                              PlaceholderText="0" 
+                              x:Uid="uidPercComp"
                               KeyDown="moduleTitleTextBox_KeyDown" />
                     <TextBlock VerticalAlignment="Center" 
                                Margin="10 8 0 0" 
-                               Text="% Of Module" />
+                               x:Uid="uidPercText" />
                     <ComboBox x:Name="priorityLevelComboBox" 
                               Margin="10 10 0 0" 
-                              PlaceholderText="Priority Level" 
+                              x:Uid="uidPriLevel"
                               KeyDown="moduleTitleTextBox_KeyDown" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Background="White" BorderBrush="Black" 
                             BorderThickness="2" Padding="0 8 0 0" Margin="0 10 0 0">
                     <StackPanel Orientation="Vertical" Padding="0 0 20 0">
                         <TextBlock x:Name="urgentEvent" Padding="10 0 10 0" FontFamily="Century Gothic" 
-                                   Foreground="Red" FontWeight="Bold" Text="Urgent:" RenderTransformOrigin="0.5,0.5" >
+                                   Foreground="Red" FontWeight="Bold" x:Uid="uidUrgent" RenderTransformOrigin="0.5,0.5" >
                             <TextBlock.RenderTransform>
                                 <CompositeTransform Rotation="-14.000"/>
                             </TextBlock.RenderTransform>
@@ -83,7 +81,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Padding="0 0 20 0">
                         <TextBlock x:Name="normalEvent" Padding="0 0 10 0" FontFamily="Century Gothic"
-                                   Foreground="Orange" FontWeight="Bold" Text="Normal: " RenderTransformOrigin="0.5,0.5" >
+                                   Foreground="Orange" FontWeight="Bold" x:Uid="uidNormal" RenderTransformOrigin="0.5,0.5" >
                             <TextBlock.RenderTransform>
                                 <CompositeTransform Rotation="-14.000"/>
                             </TextBlock.RenderTransform>
@@ -93,7 +91,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Padding="0 0 20 0">
                         <TextBlock x:Name="lowEvent" Padding="0 0 10 0" FontFamily="Century Gothic" 
-                                   Foreground="Green" FontWeight="Bold" Text="Low:" RenderTransformOrigin="0.5,0.5" >
+                                   Foreground="Green" FontWeight="Bold" x:Uid="uidLow" RenderTransformOrigin="0.5,0.5" >
                             <TextBlock.RenderTransform>
                                 <CompositeTransform Rotation="-14.000"/>
                             </TextBlock.RenderTransform>
@@ -103,7 +101,7 @@
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Padding="0 0 20 0">
                         <TextBlock x:Name="noPriority" Padding="0 0 10 0" FontFamily="Century Gothic" 
-                                   Foreground="Blue" FontWeight="Bold" Text="No Priority:" RenderTransformOrigin="0.5,0.5" >
+                                   Foreground="Blue" FontWeight="Bold" x:Uid="uidNoPri" RenderTransformOrigin="0.5,0.5" >
                             <TextBlock.RenderTransform>
                                 <CompositeTransform Rotation="-14.000"/>
                             </TextBlock.RenderTransform>
@@ -113,7 +111,7 @@
                     </StackPanel>
                     <StackPanel Padding="2" Orientation="Vertical" BorderBrush="Bisque" BorderThickness="3" Background="LightBlue">
                         <TextBlock x:Name="totalEvents" FontFamily="Century Gothic" 
-                                   Foreground="Black" FontStyle="Italic" FontWeight="ExtraBold" Text="Total:" RenderTransformOrigin="0.5,0.5" >
+                                   Foreground="Black" FontStyle="Italic" x:Uid="uidTotal" FontWeight="ExtraBold" RenderTransformOrigin="0.5,0.5" >
                             <TextBlock.RenderTransform>
                                 <CompositeTransform Rotation="-14.000"/>
                             </TextBlock.RenderTransform>
