@@ -1,5 +1,5 @@
 ﻿
-// #define OFFLINE_SYNC_ENABLED
+#define OFFLINE_SYNC_ENABLED
 
 using Microsoft.WindowsAzure.MobileServices;
 using System;
@@ -10,6 +10,7 @@ using System.Diagnostics;
 using CollegeOrganiser.DataModel;
 using Windows.UI.Popups;
 using static CollegeOrganiser.DataModel.EnumData;
+using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -32,7 +33,6 @@ namespace CollegeOrganiser.View
 #if OFFLINE_SYNC_ENABLED
         private IMobileServiceSyncTable<Event> eventTable = App.MobileService.GetSyncTable<Event>(); // offline sync
 #else
-        // local, as mentioned above
         private IMobileServiceTable<Event> eventTable = App.MobileService.GetTable<Event>();
 #endif
 
@@ -192,6 +192,7 @@ namespace CollegeOrganiser.View
         }
 
 
+
         /*
          * Function that sends a successfully entered event to either database
          * Firstly, check that each required field has been filled, if not displays the approriate error message on screen to the user. 
@@ -238,8 +239,7 @@ namespace CollegeOrganiser.View
                     requiredField.Visibility = Visibility.Collapsed;
                 }
             }
-            catch (Exception)
-            { }
+            catch (Exception){ }
         }
 
 
@@ -273,16 +273,20 @@ namespace CollegeOrganiser.View
             await App.MobileService.SyncContext.PushAsync(); // offline sync
 #endif
         }
-
+         
 
         // Function that checks if en event checkbox has been ticked, removes from the list and marks as completed, 
         // which stops any completed events from being returned back to the user during a refresh.  
         private async void CheckBoxComplete_Checked(object sender, RoutedEventArgs e)
         {
-            CheckBox cb = (CheckBox)sender;
-            Event events = cb.DataContext as Event;
-            displayEventList();
-            await UpdateCheckedEventDetails(events);
+            try
+            {
+                CheckBox cb = (CheckBox)sender;
+                Event events = cb.DataContext as Event;
+                displayEventList();
+                await UpdateCheckedEventDetails(events);
+            }
+            catch (Exception){}
         }
 
 
@@ -310,6 +314,8 @@ namespace CollegeOrganiser.View
 
 
 
+
+
         // Checks to Ensure that all ComboBoxes have data selected, returns false if not
         // Using the shortend Ternary operators conditional statement
         // Ref: https://msdn.microsoft.com/en-us/library/ty67wk28.aspx
@@ -319,27 +325,45 @@ namespace CollegeOrganiser.View
             return (comboBox.SelectedItem == null) ? false : true;
         }
 
+
+
+
         // Having an issue installing sqlite from the nuget package manager, working the issue.
         // Having an issue installing sqlite from the nuget package manager, working the issue.
         // Stored the data offline using SQLite
+
         #region Offline sync
 #if OFFLINE_SYNC_ENABLED
         private async Task InitLocalStoreAsync()
         {
-            if (!App.MobileService.SyncContext.IsInitialized)
+            try
             {
-                var store = new MobileServiceSQLiteStore("collegeOrganiser.db");
-                store.DefineTable<Event>();
-                await App.MobileService.SyncContext.InitializeAsync(store);
-            }
+                if (!App.MobileService.SyncContext.IsInitialized)
+                {
+                    var store = new MobileServiceSQLiteStore("collegeOrganiser.db");
+                    store.DefineTable<Event>();
+                    await App.MobileService.SyncContext.InitializeAsync(store);
+                }
 
-            await SyncAsync();
+                await SyncAsync();
+            }
+            catch (Exception){}
         }
+
+
 
         private async Task SyncAsync()
         {
-            await App.MobileService.SyncContext.PushAsync();
-            // await eventTable.PullAsync("eventDetails", eventTable.CreateQuery());
+            try
+            {
+                await App.MobileService.SyncContext.PushAsync();
+                await eventTable.PullAsync("eventDetails", eventTable.CreateQuery());
+            }
+            catch (Exception)
+            {
+                MessageDialog message = new MessageDialog("You Can't Sync events to the Cloud at this time.\nEvents Will be Stored locally");
+                await message.ShowAsync();
+            }
         }
 #endif
         #endregion
