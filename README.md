@@ -106,6 +106,8 @@ For your cloud data sync, you'll need to have an Azure Portal account. [Here](ht
 
 ### Main Page
 
+![title]("https://github.com/willhogan11/CollegeOrganiser/blob/master/CollegeOrganiser/CollegeOrganiser/Images/MainPage.jpg")
+
 ### Menu Page
 
 ### Events Page
