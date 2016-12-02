@@ -120,6 +120,9 @@
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-200.jpg" />
     <Content Include="Images\books.jpeg" />
+    <Content Include="Images\EventsPage.jpg" />
+    <Content Include="Images\MainPage.jpg" />
+    <Content Include="Images\MenuPage.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
