@@ -67,4 +67,36 @@ All hard coded text values have been removed from the application display and wi
 Each code section has been fully commented to enable other developers to understand my code and who may want to use parts of my project in their own projects, to understand what's going on, but also to help myself in the future should i revisit the application. 
 
 # Deployment Instructions
-#### What needs to be installed...
+To download and run this application, here's what you'll need.
+
+A fully installed version of Visual Studio 2015. 
+After successfully installing, navigate to the nuget package manager within visual studio and add the following packages dependencies to your references folder;
+
+* Microsoft.NETCore.UniversalWindowsPlatform
+* Microsoft.Azure.Mobile.Client.SQLiteStore
+* Newtonsoft.Json
+
+### SQLite local installation instructions
+To be able to run this application through Visual Studio 2015, you will need to install SQLite. 
+Please follow these steps:
+
+- Go to this site [https://www.sqlite.org/download.html](https://www.sqlite.org/download.html)
+- Download the latest version of SQLite for ```Universal Windows Platform```
+- Open up Visual Studio
+- There should be a Reference to SQLite in the References Folder of your Solution Explorer, if so skip the next few steps and continue from 'Go to Tools'
+- Right click on the ```References``` folder of your ```Solution Explorer``` and click ```Add Reference```
+- On the pop up window, go to the Universal Windows section on the left and click ```Extensions``` 
+- Tick the ```SQLite for Universal App platform``` box, then OK
+- Go to tools => NuGet package manager => Package Manager Console
+- In the package manager console, type the following ```Install-Package SQLite.Net-PCL```
+- At this point you should be informed in screen that the package was successfully installed
+
+If you are planning on building something similar using SQLite, you may need something to visualise the backend. 
+My choice was a SQLite IDE called ```sqlitebrowser```, which will help you monitor and test values as they are being inserted and deleted. 
+[Here](http://sqlitebrowser.org/) is the link to their site. 
+
+### Azure Database instance information
+For your cloud data sync, you'll need to have an Azure Portal account. [Here](https://portal.azure.com/) is the link to help you get started. You'll also need to change the url endpoint address of your database instance on azure, in your ***App.xaml.cs*** file
+
+
+
