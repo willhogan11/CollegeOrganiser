@@ -10,7 +10,7 @@
 - **Project Title:** College Organiser
 
 # Application Overview
-This is a Universal Windows Application(UWP), that has been designed for College Students to help them keep track of various events, tasks and priorities within an educational / college type environment. The application allows users to enter new events and details and save them to the cloud. _(This needs to be fixed)_ => **[When offline, the data is stored locally and will sync with cloud when the user is in a sync enabled environment]** 
+This is a Universal Windows Application(UWP), that has been designed for College Students to help them keep track of various events, tasks and priorities within an educational / college type environment. The application allows users to enter new events and details and save them to the cloud. When offline, the data is stored locally and will then sync with cloud when the user is in a sync enabled environment. 
 The application also allows users to create events with a certain priority level. These priority levels and a count for each level are displayed for the user that allows them to visualise the amount of task by priority level. 
 
 The app is straightforward and easy to use. Below is a breakdown of the controls on the visual display and how they operate:
@@ -41,7 +41,7 @@ I used Visual Studio 2015 for my development and testing of this application. In
 ### Design Pattern
 Although this application doesn't have the modularity associated with a full MVVM (Model, View, View, Model) design pattern structure, it does contain flavours of it. For example, all of my Views are in a separate folder and my Data has also been separated where possible. However, the local and cloud based information in the application are highly coupled with my C# code. 
 
-### Programming languages used
+### Programming languages / Technologies used
 
 | *Technology/Language* | *How it was used in the Application* |
 | ------------- |:-------------:|
@@ -59,6 +59,9 @@ I used GitHub extensively throughout my application development, with particular
 * **Commits** - I kept regular track of what was being committed and pushed
 * **Branches** - I made a number of branches that used in conjunction with my master branch and allowed for prototype development
 * **Project Management** - I used GitHub for my project management. This allowed me to create milestones and track issues associated with them. As mentioned above, i used the GitHub integration tool Zen Hub which allowed me to visualise my outstanding Milestones and Issues on a Kanban board. This is all held remotely on the GitHub site. 
+
+### Localisation
+All hard coded text values have been removed from the application display and will be injected at runtime. This allows for a scalable application that can be changed to fit another countries language criteria, with this another language can be added to the .resw file
 
 ### Comments
 Each code section has been fully commented to enable other developers to understand my code and who may want to use parts of my project in their own projects, to understand what's going on, but also to help myself in the future should i revisit the application. 
