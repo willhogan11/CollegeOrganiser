@@ -66,6 +66,8 @@ All hard coded text values have been removed from the application display and wi
 ### Comments
 Each code section has been fully commented to enable other developers to understand my code and who may want to use parts of my project in their own projects, to understand what's going on, but also to help myself in the future should i revisit the application. 
 
+---
+
 # Deployment Instructions
 To download and run this application, here's what you'll need.
 
@@ -98,5 +100,13 @@ My choice was a SQLite IDE called ```sqlitebrowser```, which will help you monit
 ### Azure Database instance information
 For your cloud data sync, you'll need to have an Azure Portal account. [Here](https://portal.azure.com/) is the link to help you get started. You'll also need to change the url endpoint address of your database instance on azure, in your ***App.xaml.cs*** file
 
+---
 
+# Screenshots
+
+### Main Page
+
+### Menu Page
+
+### Events Page
 
